@@ -1709,3 +1709,24 @@ body:not(.is-intro) .flat-summary-totals > div{
     grid-template-columns:1fr!important;
   }
 }
+/* Make Calculated details appear as the first proper Output subsection */
+.flow-results .flat-calculated-output-panel {
+  margin-top: 14px !important;
+  margin-bottom: 18px !important;
+  border: 1px solid var(--line) !important;
+  border-radius: 18px !important;
+  background: #fff !important;
+  padding: 16px !important;
+}
+
+.flow-results .flat-calculated-output-panel .flat-basics-head {
+  margin-bottom: 12px !important;
+}
+
+.flow-results .flat-calculated-output-panel .flat-basics-title {
+  margin: 0 !important;
+  font-size: 16px !important;
+  line-height: 1.25 !important;
+  font-weight: 900 !important;
+  color: var(--accent) !important;
+}
