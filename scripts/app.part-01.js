@@ -1138,7 +1138,10 @@ function buildContractHtml(p, idx){
     var html = originalRenderFlatMetrics(c, idx);
     var p = (window.flatRates && flatRates[idx]) || {};
     var block = calculatedDetailsBlock(p, idx);
-    return String(html).replace('<div class="flow-results"><h3>Output</h3>', '<div class="flow-results"><h3>Output</h3>' + block);
+    return String(html).replace(
+  '<div class="flow-results"><h3>Output</h3>',
+  '<div class="flow-results"><h3>Output</h3><div style="margin:12px 0;padding:10px 12px;border:2px solid #F29200;border-radius:12px;background:#fff8e8;color:#1A497F;font-weight:900;">TEST: Calculated details should appear here</div>' + block
+);
   };
 
   window.renderFlatPosition = renderFlatPosition = function(p, idx){
