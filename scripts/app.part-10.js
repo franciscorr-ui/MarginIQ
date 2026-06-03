@@ -452,3 +452,56 @@
     observer.observe(document.getElementById('stepContent') || document.body, {childList:true, subtree:true});
   } catch(e) {}
 })();
+
+
+// ===== MarginIQ v8: make "Open position" buttons leave side panels and open the position editor =====
+(function(){
+  function leaveSidePanels(){
+    try { window.showProjectStaffPanel = false; } catch(_) {}
+    try { window.showLegalContractsPanel = false; } catch(_) {}
+    try { window.showBudgetPanel = false; } catch(_) {}
+    try { showBackstage = false; } catch(_) {}
+    try { currentStep = 1; } catch(_) {}
+  }
+
+  function installOpenFlatFix(){
+    var base = window.openFlat || (typeof openFlat === 'function' ? openFlat : null);
+    if (!base || base.__miqOpenPositionFixV8) return;
+
+    function fixedOpenFlat(idx){
+      leaveSidePanels();
+      var result;
+      try {
+        result = base.apply(this, arguments);
+      } catch (e) {
+        try { console.error('MarginIQ openFlat failed before v8 fallback', e); } catch(_) {}
+      }
+      leaveSidePanels();
+      try {
+        var nIdx = Number(idx);
+        if (Array.isArray(flatRates)) {
+          flatRates.forEach(function(p, i){ p._collapsed = i !== nIdx; });
+        }
+      } catch(_) {}
+      try {
+        if (typeof renderAll === 'function') renderAll();
+        else if (typeof renderStep === 'function') renderStep();
+      } catch (e) {
+        try { console.error('MarginIQ openFlat v8 render fallback failed', e); } catch(_) {}
+      }
+      return result;
+    }
+
+    fixedOpenFlat.__miqOpenPositionFixV8 = true;
+    window.openFlat = fixedOpenFlat;
+    try { openFlat = fixedOpenFlat; } catch(_) {}
+  }
+
+  installOpenFlatFix();
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', installOpenFlatFix);
+  }
+  setTimeout(installOpenFlatFix, 0);
+  setTimeout(installOpenFlatFix, 300);
+  setTimeout(installOpenFlatFix, 1000);
+})();
