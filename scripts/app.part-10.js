@@ -30,7 +30,7 @@
 })();
 
 
-// ===== MarginIQ active layout patch v5: Outputs, Calculated details, clean Inputs, aligned cost columns =====
+// ===== MarginIQ active layout patch v6: Outputs, Calculated details, clean Inputs, aligned cost columns =====
 (function(){
   function esc(value){
     return String(value == null || value === '' ? '—' : value)
@@ -75,7 +75,7 @@
   window.calculatedDetailsBlock = makeCalculatedDetailsBlock;
 
   function installStyle(){
-    var id = 'marginiq-active-layout-patch-v5';
+    var id = 'marginiq-active-layout-patch-v6';
     var old = document.getElementById(id);
     if (old) old.remove();
     var css = `
@@ -164,6 +164,153 @@
       .mi-output-calc-item { border: 1px solid #eef2f7 !important; border-radius: 12px !important; background: #fbfdff !important; padding: 10px 12px !important; }
       .mi-output-calc-label { font-size: 12px !important; line-height: 1.2 !important; color: #64748b !important; font-weight: 800 !important; }
       .mi-output-calc-value { margin-top: 4px !important; font-size: 14px !important; line-height: 1.25 !important; color: #0f172a !important; font-weight: 800 !important; }
+      .flat-workspace-header h4 {
+        margin: 0 !important;
+        font-size: 18px !important;
+        line-height: 1.25 !important;
+        font-weight: 900 !important;
+        color: #1A497F !important;
+      }
+      .flat-workspace-header h4::first-letter { color: #1A497F !important; }
+      .flat-workspace-left .flat-workspace-panel-title {
+        margin: 0 0 10px 0 !important;
+        padding: 0 !important;
+        border: 0 !important;
+        color: #0f172a !important;
+        font-size: 20px !important;
+        font-weight: 900 !important;
+      }
+      .flat-workspace-left .flat-subsection-head { display: none !important; }
+      .flat-workspace-left .flat-input-breakdown {
+        margin-top: 14px !important;
+        border: 0 !important;
+        border-radius: 0 !important;
+        background: transparent !important;
+        overflow: visible !important;
+      }
+      .flat-workspace-left .mi-cost-section,
+      .flat-workspace-left .days-distribution-card {
+        border: 1px solid var(--line) !important;
+        border-radius: 18px !important;
+        background: #fff !important;
+        overflow: hidden !important;
+        margin: 0 0 14px 0 !important;
+      }
+      .flat-workspace-left .mi-cost-section-head,
+      .flat-workspace-left .days-distribution-head {
+        padding: 14px 16px 12px !important;
+        border-bottom: 1px solid var(--line) !important;
+        background: #fff !important;
+      }
+      .flat-workspace-left .mi-cost-section-title,
+      .flat-workspace-left .days-distribution-title {
+        margin: 0 !important;
+        color: #0f172a !important;
+        font-size: 16px !important;
+        line-height: 1.25 !important;
+        font-weight: 900 !important;
+        letter-spacing: 0 !important;
+        text-transform: none !important;
+      }
+      #stepContent .flat-workspace-left .mi-cost-row,
+      .flat-workspace-left .mi-cost-row {
+        min-height: 52px !important;
+        padding: 10px 16px !important;
+        border-bottom: 1px solid #eef2f7 !important;
+        background: #fff !important;
+      }
+      .flat-workspace-left .mi-cost-label-cell {
+        display: grid !important;
+        grid-template-columns: 22px minmax(0,1fr) !important;
+        gap: 10px !important;
+        align-items: center !important;
+        min-width: 0 !important;
+      }
+      .flat-workspace-left .mi-cost-index {
+        display: block !important;
+        width: auto !important;
+        height: auto !important;
+        min-width: 0 !important;
+        border: 0 !important;
+        border-radius: 0 !important;
+        background: transparent !important;
+        color: #64748b !important;
+        font-size: 12px !important;
+        line-height: 1.2 !important;
+        font-weight: 700 !important;
+        text-align: right !important;
+      }
+      .flat-workspace-left .mi-cost-name {
+        color: #0f172a !important;
+        font-size: 14px !important;
+        line-height: 1.25 !important;
+        font-weight: 800 !important;
+        white-space: normal !important;
+      }
+      #stepContent .flat-workspace-left .mi-cost-column-head,
+      .flat-workspace-left .mi-cost-column-head {
+        grid-template-columns: minmax(160px,1fr) 100px 100px 110px !important;
+        column-gap: 12px !important;
+        padding: 8px 16px !important;
+        background: #f8fbff !important;
+        border-bottom: 1px solid #eef2f7 !important;
+      }
+      #stepContent .flat-workspace-left .mi-cost-row,
+      .flat-workspace-left .mi-cost-row,
+      #stepContent .flat-workspace-left .mi-cost-section-total,
+      .flat-workspace-left .mi-cost-section-total {
+        grid-template-columns: minmax(160px,1fr) 100px 100px 110px !important;
+        column-gap: 12px !important;
+      }
+      .flat-workspace-left .mi-cost-column-head > div {
+        text-align: right !important;
+        font-size: 11px !important;
+        line-height: 1.2 !important;
+        font-weight: 800 !important;
+        color: #64748b !important;
+      }
+      .flat-workspace-left .mi-cost-column-head > div:first-child { text-align: left !important; }
+      .flat-workspace-left .mi-cost-field input {
+        height: 34px !important;
+        min-height: 34px !important;
+        padding: 6px 8px !important;
+        font-size: 13px !important;
+        border-radius: 10px !important;
+        text-align: right !important;
+      }
+      .flat-workspace-left .mi-cost-total {
+        font-size: 14px !important;
+        line-height: 1.25 !important;
+        font-weight: 900 !important;
+        color: #0f172a !important;
+      }
+      .flat-workspace-left .mi-cost-section-total {
+        padding: 12px 16px !important;
+        border-top: 1px solid #dbe4f0 !important;
+        background: #f8fbff !important;
+      }
+      .flat-workspace-left .mi-cost-section-total-name {
+        grid-column: 1 / 4 !important;
+        color: #0f172a !important;
+        font-size: 13px !important;
+        font-weight: 900 !important;
+        text-align: right !important;
+      }
+      .flat-workspace-left .mi-cost-section-total-value {
+        color: #0f172a !important;
+        font-size: 14px !important;
+        font-weight: 900 !important;
+        text-align: right !important;
+      }
+      .flat-workspace-left .mi-cost-column-head-percent,
+      #stepContent .flat-workspace-left .mi-cost-percent-row,
+      .flat-workspace-left .mi-cost-percent-row {
+        grid-template-columns: minmax(160px,1fr) 100px 110px !important;
+      }
+      .flat-workspace-left .mi-cost-percent-row .mi-cost-total-cell { grid-column: auto !important; }
+      .flat-workspace-left .days-distribution-title { text-transform: none !important; }
+      .flat-workspace-left .days-distribution-body { padding: 14px 16px 16px !important; }
+      .flat-workspace-left .days-distribution-summary { grid-template-columns: repeat(3,minmax(0,1fr)) !important; }
       @media (max-width: 760px){
         .mi-output-calc-grid { grid-template-columns: 1fr !important; }
         .flat-workspace-left .mi-cost-column-head { display: none !important; }
@@ -202,19 +349,30 @@
       document.querySelectorAll('.flow-results > h3').forEach(function(h){ if (h.textContent.trim() === 'Output') h.textContent = 'Outputs'; });
       document.querySelectorAll('.flat-workspace-left .flat-basics-title').forEach(function(el){ el.style.display = 'none'; });
       document.querySelectorAll('.flat-workspace-left .flat-basics-group-title').forEach(function(el){ if (el.textContent.trim() === 'Entered details') el.textContent = 'Basics'; });
+      document.querySelectorAll('.days-distribution-title').forEach(function(el){ el.textContent = 'distribution of days'; });
+      document.querySelectorAll('.flat-workspace-position').forEach(function(pos){
+        var left = pos.querySelector('.flat-workspace-left .flat-input-breakdown');
+        var card = pos.querySelector('.flat-workspace-right .days-distribution-card, .flow-results .days-distribution-card');
+        if (left && card) {
+          var sections = left.querySelectorAll('.mi-cost-section');
+          var firstSection = sections && sections[0] ? sections[0] : null;
+          if (firstSection && firstSection.nextSibling) left.insertBefore(card, firstSection.nextSibling);
+          else left.appendChild(card);
+        }
+      });
     } catch(_) {}
   }
 
   function wrapRenderFlatPosition(){
     var base = window.renderFlatPosition || (typeof renderFlatPosition === 'function' ? renderFlatPosition : null);
-    if (!base || base.__miqActiveLayoutPatchV5) return;
+    if (!base || base.__miqActiveLayoutPatchV6) return;
     function wrapped(p, idx){
       var html = base.apply(this, arguments);
       var result = insertCalculatedDetails(html, p, idx);
       setTimeout(function(){ installStyle(); postProcessDom(); }, 0);
       return result;
     }
-    wrapped.__miqActiveLayoutPatchV5 = true;
+    wrapped.__miqActiveLayoutPatchV6 = true;
     window.renderFlatPosition = wrapped;
     try { renderFlatPosition = wrapped; } catch (_) {}
   }

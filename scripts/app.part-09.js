@@ -59,7 +59,7 @@
         { key:'marginRate', label:'Margin rate', rateField:'marginRate', total:(c.marginRateDecimal || 0) * 100, special:'percent' }
       ]}
     ];
-    return '<div class="flat-subsection-head"><h4 class="flat-subsection-title">Input</h4></div><div class="component-breakdown flat-input-breakdown mi-cost-breakdown">' + sections.map(function(section){ return sectionHtml(section, p, idx); }).join('') + '</div>';
+    return '<div class="component-breakdown flat-input-breakdown mi-cost-breakdown">' + sections.map(function(section){ return sectionHtml(section, p, idx); }).join('') + '</div>';
   };
   try { renderSmartComponentRows = window.renderSmartComponentRows; } catch(e) {}
 })();

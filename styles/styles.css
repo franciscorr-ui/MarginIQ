@@ -1934,3 +1934,35 @@ body:not(.is-intro) .flat-summary-totals > div{
   .flat-workspace-left .mi-cost-section-total { grid-template-columns: 1fr !important; }
   .flat-workspace-left .mi-cost-section-total-name { grid-column: auto !important; text-align: left !important; }
 }
+
+
+/* ===== MarginIQ v6 left/right visual alignment patch ===== */
+.flat-workspace-header h4{margin:0!important;font-size:18px!important;line-height:1.25!important;font-weight:900!important;color:#1A497F!important;}
+.flat-workspace-left{border:0!important;background:transparent!important;box-shadow:none!important;padding:0!important;overflow:visible!important;max-height:none!important;position:relative!important;top:auto!important;}
+.flat-workspace-left .flat-workspace-panel-title{margin:0 0 10px 0!important;padding:0!important;border:0!important;color:#0f172a!important;font-size:20px!important;font-weight:900!important;}
+.flat-workspace-left .flat-subsection-head{display:none!important;}
+.flat-workspace-left .flat-basics-head{display:none!important;}
+.flat-workspace-left .flat-basics-panel{border:0!important;background:transparent!important;padding:0!important;margin:0!important;}
+.flat-workspace-left .flat-basics-group,.flat-workspace-left .mi-cost-section,.flat-workspace-left .days-distribution-card{border:1px solid var(--line)!important;border-radius:18px!important;background:#fff!important;overflow:hidden!important;margin:0 0 14px 0!important;}
+.flat-workspace-left .flat-basics-group-head,.flat-workspace-left .mi-cost-section-head,.flat-workspace-left .days-distribution-head{padding:14px 16px 12px!important;border-bottom:1px solid var(--line)!important;background:#fff!important;}
+.flat-workspace-left .flat-basics-group-title,.flat-workspace-left .mi-cost-section-title,.flat-workspace-left .days-distribution-title{margin:0!important;color:#0f172a!important;font-size:16px!important;line-height:1.25!important;font-weight:900!important;letter-spacing:0!important;text-transform:none!important;}
+.flat-workspace-left .flat-basics-grid{padding:14px 16px!important;}
+.flat-workspace-left .flat-input-breakdown{margin-top:14px!important;border:0!important;border-radius:0!important;background:transparent!important;overflow:visible!important;}
+#stepContent .flat-workspace-left .mi-cost-column-head,.flat-workspace-left .mi-cost-column-head,#stepContent .flat-workspace-left .mi-cost-row,.flat-workspace-left .mi-cost-row,#stepContent .flat-workspace-left .mi-cost-section-total,.flat-workspace-left .mi-cost-section-total{display:grid!important;grid-template-columns:minmax(160px,1fr) 100px 100px 110px!important;column-gap:12px!important;align-items:center!important;}
+.flat-workspace-left .mi-cost-column-head{padding:8px 16px!important;background:#f8fbff!important;border-bottom:1px solid #eef2f7!important;}
+.flat-workspace-left .mi-cost-column-head>div{text-align:right!important;font-size:11px!important;line-height:1.2!important;font-weight:800!important;color:#64748b!important;}
+.flat-workspace-left .mi-cost-column-head>div:first-child{text-align:left!important;}
+.flat-workspace-left .mi-cost-row{min-height:52px!important;padding:10px 16px!important;border-bottom:1px solid #eef2f7!important;background:#fff!important;}
+.flat-workspace-left .mi-cost-label-cell{display:grid!important;grid-template-columns:22px minmax(0,1fr)!important;gap:10px!important;align-items:center!important;min-width:0!important;}
+.flat-workspace-left .mi-cost-index{display:block!important;width:auto!important;height:auto!important;min-width:0!important;border:0!important;border-radius:0!important;background:transparent!important;color:#64748b!important;font-size:12px!important;line-height:1.2!important;font-weight:700!important;text-align:right!important;}
+.flat-workspace-left .mi-cost-name{color:#0f172a!important;font-size:14px!important;line-height:1.25!important;font-weight:800!important;white-space:normal!important;}
+.flat-workspace-left .mi-cost-field input{width:100%!important;min-width:0!important;max-width:none!important;height:34px!important;min-height:34px!important;padding:6px 8px!important;font-size:13px!important;border-radius:10px!important;text-align:right!important;}
+.flat-workspace-left .mi-cost-total-cell{justify-items:end!important;grid-column:auto!important;padding-top:0!important;}
+.flat-workspace-left .mi-cost-total{font-size:14px!important;line-height:1.25!important;font-weight:900!important;color:#0f172a!important;}
+.flat-workspace-left .mi-cost-section-total{padding:12px 16px!important;border-top:1px solid #dbe4f0!important;background:#f8fbff!important;}
+.flat-workspace-left .mi-cost-section-total-name{grid-column:1 / 4!important;text-align:right!important;color:#0f172a!important;font-size:13px!important;font-weight:900!important;}
+.flat-workspace-left .mi-cost-section-total-value{text-align:right!important;color:#0f172a!important;font-size:14px!important;font-weight:900!important;}
+.flat-workspace-left .mi-cost-column-head-percent,#stepContent .flat-workspace-left .mi-cost-percent-row,.flat-workspace-left .mi-cost-percent-row{grid-template-columns:minmax(160px,1fr) 100px 110px!important;}
+.flat-workspace-left .days-distribution-body{padding:14px 16px 16px!important;}
+.flat-workspace-left .days-distribution-title{text-transform:none!important;}
+@media (max-width:760px){#stepContent .flat-workspace-left .mi-cost-column-head,.flat-workspace-left .mi-cost-column-head{display:none!important;}#stepContent .flat-workspace-left .mi-cost-row,.flat-workspace-left .mi-cost-row,#stepContent .flat-workspace-left .mi-cost-section-total,.flat-workspace-left .mi-cost-section-total{grid-template-columns:1fr!important;}.flat-workspace-left .mi-cost-section-total-name{grid-column:auto!important;text-align:left!important;}}
