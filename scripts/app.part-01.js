@@ -1014,7 +1014,7 @@ function buildContractHtml(p, idx){
 
 
 <style id="final-inputs-assumptions-width-and-output-alignment-patch">
-/* Final override: Inputs & assumptions increased by another 20% and clearer per-row inputs. */
+/* Final override: Inputs increased by another 20% and clearer per-row inputs. */
 @media (min-width:1101px){
   .flat-workspace-shell{
     grid-template-columns:minmax(460px,548px) minmax(0,1fr)!important;
@@ -1083,6 +1083,9 @@ function buildContractHtml(p, idx){
     return '<div class="details-panel flat-basics-panel flat-calculated-output-panel"><div class="flat-basics-head"><h4 class="flat-basics-title">Calculated details</h4></div><div class="flat-basics-body">' + flatBasicsGroup('Calculated details', calculatedDetails, 'flat-basics-calculated') + '</div></div>';
   }
 
+  // Expose this helper so the active Output renderer can insert it directly.
+  window.calculatedDetailsBlock = calculatedDetailsBlock;
+
   window.renderPositionDetails = renderPositionDetails = function(p, idx){
     var enteredDetails = '' +
       field('Position title', '<input data-idx="' + idx + '" data-field="title" value="' + esc(p.title) + '" class="flat-input" placeholder="Write position title">') +
@@ -1133,16 +1136,7 @@ function buildContractHtml(p, idx){
     }).join('') + '</div>';
   };
 
-  var originalRenderFlatMetrics = window.renderFlatMetrics || renderFlatMetrics;
-  window.renderFlatMetrics = renderFlatMetrics = function(c, idx){
-    var html = originalRenderFlatMetrics(c, idx);
-    var p = (window.flatRates && flatRates[idx]) || {};
-    var block = calculatedDetailsBlock(p, idx);
-    return String(html).replace(
-  '<div class="flow-results"><h3>Output</h3>',
-  '<div class="flow-results"><h3>Output</h3><div style="margin:12px 0;padding:10px 12px;border:2px solid #F29200;border-radius:12px;background:#fff8e8;color:#1A497F;font-weight:900;">TEST: Calculated details should appear here</div>' + block
-);
-  };
+  // The Calculated details block is inserted directly in the active renderFlatMetrics function below.
 
   window.renderFlatPosition = renderFlatPosition = function(p, idx){
     var c = computePosition(p);
@@ -1150,7 +1144,7 @@ function buildContractHtml(p, idx){
     if (!!p._collapsed){
       return '<div class="position is-collapsed">' + renderPositionSummary(p, idx) + '</div>';
     }
-    return '<div class="position flat-workspace-position"><div class="top-actions flat-workspace-header"><div><h4>' + esc(displayTitle) + '</h4></div><div class="position-tools"><button class="small primary" onclick="saveFlat(' + idx + ')">' + (p._saved ? 'Save position' : 'Save changes') + '</button><button class="secondary small" onclick="event.stopPropagation(); removeFlat(' + idx + ')">Remove</button></div></div><div class="position-open-shell flat-workspace-shell"><aside class="flat-workspace-left" aria-label="Inputs and assumptions"><div class="flat-workspace-panel-title">Inputs &amp; assumptions</div>' + renderPositionDetails(p, idx) + renderSmartComponentRows(p, c, idx) + '</aside><section class="flat-workspace-right" aria-label="Calculation output">' + renderFlatMetrics(c, idx) + '</section></div></div>';
+    return '<div class="position flat-workspace-position"><div class="top-actions flat-workspace-header"><div><h4>' + esc(displayTitle) + '</h4></div><div class="position-tools"><button class="small primary" onclick="saveFlat(' + idx + ')">' + (p._saved ? 'Save position' : 'Save changes') + '</button><button class="secondary small" onclick="event.stopPropagation(); removeFlat(' + idx + ')">Remove</button></div></div><div class="position-open-shell flat-workspace-shell"><aside class="flat-workspace-left" aria-label="Inputs"><div class="flat-workspace-panel-title">Inputs</div>' + renderPositionDetails(p, idx) + renderSmartComponentRows(p, c, idx) + '</aside><section class="flat-workspace-right" aria-label="Calculation output">' + renderFlatMetrics(c, idx) + '</section></div></div>';
   };
 })();
 <\/script>
@@ -1162,7 +1156,7 @@ function buildContractHtml(p, idx){
 
 
 <style id="inputs-assumptions-plus-20-v5">
-/* User request: increase the Inputs & assumptions panel by 20%. */
+/* User request: increase the Inputs panel by 20%. */
 @media (min-width:1101px){
   .flat-workspace-shell{
     grid-template-columns:minmax(460px,548px) minmax(0,1fr)!important;
@@ -1175,7 +1169,7 @@ function buildContractHtml(p, idx){
 
 
 <style id="mi-half-screen-layout-v6">
-/* FINAL LAYOUT FIX: Inputs & assumptions take the left half, Output takes the right half. */
+/* FINAL LAYOUT FIX: Inputs take the left half, Output takes the right half. */
 @media (min-width:1101px){
   #stepContent .flat-workspace-shell{
     display:grid!important;
@@ -2434,6 +2428,9 @@ function renderFlatMetrics(c, idx){
   const vatRateApplied = (c.vatCollected || 0) > 0 ? `${formatPlainNumber(((c.vatCollected || 0) / Math.max(0.0001, vatBase)) * 100)}%` : "0%";
   const vatCostFlag = (c.vatCollected || 0) > 0 ? ((c.vatCost || 0) > 0 ? "non-recoverable" : "recoverable") : "not collected";
   const grossFormula = (position.inputMode === "Net") ? "Net input / (1 - WHT rate)" : "Fees + Per diem + Other";
+  const calculatedDetailsHtml = (typeof window !== "undefined" && typeof window.calculatedDetailsBlock === "function")
+    ? window.calculatedDetailsBlock(position, idx)
+    : "";
 
   const invoiceLine = (kicker, name, formula, id, value, note = '', extraClass = '') => {
     const tooltipText = `Calculation: ${formula}${note ? ` — ${note}` : ''}`;
@@ -2444,7 +2441,7 @@ function renderFlatMetrics(c, idx){
         </div></td><td class="invoice-amount-cell"><div class="invoice-amount calculation-tooltip" id="metric-${idx}-${id}" tabindex="0" title="${tooltip}" aria-label="${tooltip}" data-tooltip="${tooltip}">${value}</div></td></tr>`;
   };
 
-  return `<div class="flow-results"><h3>Output</h3><div class="invoice-breakdown"><div class="invoice-section"><div class="invoice-head"><div class="invoice-title">Provider remuneration</div><div class="invoice-sub">Gross-to-net story. Hover over an amount to see the calculation.</div></div><table class="invoice-table story-table"><colgroup><col class="concept-col"><col class="amount-col"></colgroup>
+  return `<div class="flow-results"><h3>Output</h3>${calculatedDetailsHtml}<div class="invoice-breakdown"><div class="invoice-section"><div class="invoice-head"><div class="invoice-title">Provider remuneration</div><div class="invoice-sub">Gross-to-net story. Hover over an amount to see the calculation.</div></div><table class="invoice-table story-table"><colgroup><col class="concept-col"><col class="amount-col"></colgroup>
           ${invoiceLine('Line 1', 'Contractual gross remuneration', grossFormula, 'Gj', money(c.remunerationTotal))}
           ${invoiceLine('Line 2', 'Taxable base', 'Gross remuneration - non-taxable allowances', 'Gjtax', money(c.taxableBase))}
           ${invoiceLine('Line 3', 'Gross-up effect', 'Gross remuneration - net input', 'GrossUp', money(c.grossUpAmount || 0))}
@@ -2554,7 +2551,7 @@ function renderFlatPosition(p, idx){
       ${renderPositionSummary(p, idx)}
     </div>`;
   }
-  return `<div class="position flat-workspace-position"><div class="top-actions flat-workspace-header"><div><h4>${esc(displayTitle)}</h4></div><div class="position-tools"><button class="small primary" onclick="saveFlat(${idx})">${p._saved ? "Save position" : "Save changes"}</button><button class="secondary small" onclick="event.stopPropagation(); removeFlat(${idx})">Remove</button></div></div><div class="position-open-shell flat-workspace-shell"><aside class="flat-workspace-left" aria-label="Inputs and assumptions"><div class="flat-workspace-panel-title">Inputs &amp; assumptions</div>${renderPositionDetails(p, idx)}${renderSmartComponentRows(p, c, idx)}</aside><section class="flat-workspace-right" aria-label="Calculation output">${renderFlatMetrics(c, idx)}</section></div></div>`;
+  return `<div class="position flat-workspace-position"><div class="top-actions flat-workspace-header"><div><h4>${esc(displayTitle)}</h4></div><div class="position-tools"><button class="small primary" onclick="saveFlat(${idx})">${p._saved ? "Save position" : "Save changes"}</button><button class="secondary small" onclick="event.stopPropagation(); removeFlat(${idx})">Remove</button></div></div><div class="position-open-shell flat-workspace-shell"><aside class="flat-workspace-left" aria-label="Inputs"><div class="flat-workspace-panel-title">Inputs</div>${renderPositionDetails(p, idx)}${renderSmartComponentRows(p, c, idx)}</aside><section class="flat-workspace-right" aria-label="Calculation output">${renderFlatMetrics(c, idx)}</section></div></div>`;
 }
 
 function renderExpenseList(kind, items, title){
