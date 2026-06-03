@@ -1773,3 +1773,38 @@ body:not(.is-intro) .flat-summary-totals > div{
 #stepContent .flat-workspace-left .flat-input-breakdown .component-line .component-mobile-label{
   display:none!important;
 }
+
+
+/* Output/Input layout fix v2: no inner input scroll and single column labels */
+#stepContent .flat-workspace-shell,
+.flat-workspace-shell {
+  align-items: start !important;
+  overflow: visible !important;
+}
+#stepContent .flat-workspace-left,
+.flat-workspace-left {
+  max-height: none !important;
+  height: auto !important;
+  overflow-y: visible !important;
+  overflow-x: visible !important;
+  overflow: visible !important;
+  position: static !important;
+}
+#stepContent .flat-workspace-right,
+.flat-workspace-right {
+  overflow: visible !important;
+}
+.flat-workspace-left .component-mobile-label,
+.flat-workspace-left .component-field-label {
+  display: none !important;
+}
+.flat-workspace-left .component-colhead .component-hlabel {
+  display: block !important;
+  text-align: center !important;
+  font-size: 12px !important;
+  font-weight: 900 !important;
+  color: #64748b !important;
+}
+.flat-workspace-right .flat-calculated-output-panel {
+  margin: 0 0 14px 0 !important;
+}
