@@ -1966,3 +1966,267 @@ body:not(.is-intro) .flat-summary-totals > div{
 .flat-workspace-left .days-distribution-body{padding:14px 16px 16px!important;}
 .flat-workspace-left .days-distribution-title{text-transform:none!important;}
 @media (max-width:760px){#stepContent .flat-workspace-left .mi-cost-column-head,.flat-workspace-left .mi-cost-column-head{display:none!important;}#stepContent .flat-workspace-left .mi-cost-row,.flat-workspace-left .mi-cost-row,#stepContent .flat-workspace-left .mi-cost-section-total,.flat-workspace-left .mi-cost-section-total{grid-template-columns:1fr!important;}.flat-workspace-left .mi-cost-section-total-name{grid-column:auto!important;text-align:left!important;}}
+
+/* ===== MarginIQ layout refinement v7 ===== */
+#stepContent .flat-workspace-header h4,
+.flat-workspace-header h4 {
+  font-size: 20px !important;
+  line-height: 1.25 !important;
+  font-weight: 900 !important;
+  color: var(--accent) !important;
+  letter-spacing: -0.01em !important;
+  margin: 0 !important;
+}
+
+#stepContent .flat-workspace-panel-title,
+.flat-workspace-panel-title,
+#stepContent .flat-workspace-right .flow-results > h3,
+.flat-workspace-right .flow-results > h3 {
+  font-size: 20px !important;
+  line-height: 1.2 !important;
+  font-weight: 900 !important;
+  color: #0f172a !important;
+  margin: 0 0 12px 0 !important;
+  background: transparent !important;
+  padding: 0 !important;
+}
+
+#stepContent .flat-subsection-head,
+.flat-subsection-head {
+  display: none !important;
+}
+
+#stepContent .flat-workspace-left,
+.flat-workspace-left {
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  overflow: visible !important;
+  max-height: none !important;
+}
+
+#stepContent .flat-workspace-left .flat-basics-panel,
+.flat-workspace-left .flat-basics-panel {
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  margin: 0 0 12px 0 !important;
+}
+
+#stepContent .flat-workspace-left .flat-basics-head,
+.flat-workspace-left .flat-basics-head,
+#stepContent .flat-workspace-left .flat-basics-title,
+.flat-workspace-left .flat-basics-title {
+  display: none !important;
+}
+
+#stepContent .flat-workspace-left .flat-basics-group,
+.flat-workspace-left .flat-basics-group,
+#stepContent .flat-workspace-left .mi-cost-section,
+.flat-workspace-left .mi-cost-section,
+#stepContent .flat-workspace-left .days-distribution-card,
+.flat-workspace-left .days-distribution-card {
+  border: 1px solid var(--line) !important;
+  border-radius: 18px !important;
+  background: #fff !important;
+  overflow: hidden !important;
+  box-shadow: none !important;
+  margin: 0 0 12px 0 !important;
+}
+
+#stepContent .flat-workspace-left .flat-basics-group-head,
+.flat-workspace-left .flat-basics-group-head,
+#stepContent .flat-workspace-left .mi-cost-section-head,
+.flat-workspace-left .mi-cost-section-head,
+#stepContent .flat-workspace-left .days-distribution-head,
+.flat-workspace-left .days-distribution-head {
+  padding: 14px 16px 12px !important;
+  border-bottom: 1px solid var(--line) !important;
+  background: #fff !important;
+}
+
+#stepContent .flat-workspace-left .flat-basics-group-title,
+.flat-workspace-left .flat-basics-group-title,
+#stepContent .flat-workspace-left .mi-cost-section-title,
+.flat-workspace-left .mi-cost-section-title,
+#stepContent .flat-workspace-left .days-distribution-title,
+.flat-workspace-left .days-distribution-title {
+  margin: 0 !important;
+  font-size: 14px !important;
+  line-height: 1.25 !important;
+  font-weight: 900 !important;
+  color: #0f172a !important;
+  text-transform: none !important;
+  letter-spacing: 0 !important;
+}
+
+#stepContent .flat-workspace-left .days-distribution-title,
+.flat-workspace-left .days-distribution-title {
+  text-transform: lowercase !important;
+}
+
+#stepContent .flat-workspace-left .flat-basics-grid,
+.flat-workspace-left .flat-basics-grid,
+#stepContent .flat-workspace-left .days-distribution-body,
+.flat-workspace-left .days-distribution-body {
+  padding: 14px 16px !important;
+}
+
+#stepContent .flat-workspace-left .mi-cost-breakdown,
+.flat-workspace-left .mi-cost-breakdown {
+  display: grid !important;
+  gap: 12px !important;
+  border: 0 !important;
+  background: transparent !important;
+  margin: 0 !important;
+  overflow: visible !important;
+}
+
+#stepContent .flat-workspace-left .mi-cost-column-head,
+.flat-workspace-left .mi-cost-column-head,
+#stepContent .flat-workspace-left .mi-cost-row,
+.flat-workspace-left .mi-cost-row,
+#stepContent .flat-workspace-left .mi-cost-section-total,
+.flat-workspace-left .mi-cost-section-total {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1.6fr) minmax(64px, .7fr) minmax(64px, .7fr) minmax(88px, .8fr) !important;
+  column-gap: 12px !important;
+  align-items: center !important;
+}
+
+#stepContent .flat-workspace-left .mi-cost-column-head,
+.flat-workspace-left .mi-cost-column-head {
+  padding: 9px 16px !important;
+  background: #f8fbff !important;
+  border-bottom: 1px solid #eef2f7 !important;
+  color: #64748b !important;
+  font-size: 11px !important;
+  line-height: 1.2 !important;
+  font-weight: 800 !important;
+}
+
+#stepContent .flat-workspace-left .mi-cost-column-head > div,
+.flat-workspace-left .mi-cost-column-head > div {
+  text-align: right !important;
+}
+#stepContent .flat-workspace-left .mi-cost-column-head > div:first-child,
+.flat-workspace-left .mi-cost-column-head > div:first-child {
+  text-align: left !important;
+}
+
+#stepContent .flat-workspace-left .mi-cost-row,
+.flat-workspace-left .mi-cost-row {
+  min-height: 52px !important;
+  padding: 8px 16px !important;
+  border-bottom: 1px solid #eef2f7 !important;
+  background: #fff !important;
+}
+#stepContent .flat-workspace-left .mi-cost-row:last-child,
+.flat-workspace-left .mi-cost-row:last-child {
+  border-bottom: 0 !important;
+}
+
+#stepContent .flat-workspace-left .mi-cost-label-cell,
+.flat-workspace-left .mi-cost-label-cell {
+  display: grid !important;
+  grid-template-columns: 22px minmax(0,1fr) !important;
+  gap: 8px !important;
+  align-items: center !important;
+  min-width: 0 !important;
+}
+
+#stepContent .flat-workspace-left .mi-cost-index,
+.flat-workspace-left .mi-cost-index {
+  display: inline-block !important;
+  width: 18px !important;
+  height: auto !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  color: #64748b !important;
+  font-size: 11px !important;
+  line-height: 1 !important;
+  font-weight: 700 !important;
+  text-align: center !important;
+}
+
+#stepContent .flat-workspace-left .mi-cost-name,
+.flat-workspace-left .mi-cost-name {
+  font-size: 13px !important;
+  line-height: 1.2 !important;
+  font-weight: 800 !important;
+  color: #0f172a !important;
+  min-width: 0 !important;
+}
+
+#stepContent .flat-workspace-left .mi-cost-field input,
+.flat-workspace-left .mi-cost-field input {
+  width: 100% !important;
+  min-width: 0 !important;
+  height: 30px !important;
+  padding: 5px 8px !important;
+  text-align: right !important;
+  font-size: 13px !important;
+  font-variant-numeric: tabular-nums !important;
+}
+
+#stepContent .flat-workspace-left .mi-cost-total-cell,
+.flat-workspace-left .mi-cost-total-cell {
+  justify-self: end !important;
+  text-align: right !important;
+}
+
+#stepContent .flat-workspace-left .mi-cost-total,
+.flat-workspace-left .mi-cost-total,
+#stepContent .flat-workspace-left .mi-cost-section-total-value,
+.flat-workspace-left .mi-cost-section-total-value {
+  font-size: 14px !important;
+  line-height: 1.2 !important;
+  font-weight: 900 !important;
+  color: #0f172a !important;
+  white-space: nowrap !important;
+  font-variant-numeric: tabular-nums !important;
+}
+
+#stepContent .flat-workspace-left .mi-cost-section-total,
+.flat-workspace-left .mi-cost-section-total {
+  padding: 10px 16px !important;
+  background: #f8fbff !important;
+  border-top: 1px solid #dbe4f0 !important;
+}
+
+#stepContent .flat-workspace-left .mi-cost-section-total-name,
+.flat-workspace-left .mi-cost-section-total-name {
+  grid-column: 1 / 4 !important;
+  text-align: right !important;
+  font-size: 13px !important;
+  line-height: 1.2 !important;
+  font-weight: 900 !important;
+  color: #0f172a !important;
+}
+
+#stepContent .flat-workspace-left .mi-cost-column-head-percent,
+#stepContent .flat-workspace-left .mi-cost-percent-row,
+.flat-workspace-left .mi-cost-column-head-percent,
+.flat-workspace-left .mi-cost-percent-row {
+  grid-template-columns: minmax(0, 1.6fr) minmax(64px, .7fr) minmax(88px, .8fr) !important;
+}
+#stepContent .flat-workspace-left .mi-cost-percent-row .mi-cost-total-cell,
+.flat-workspace-left .mi-cost-percent-row .mi-cost-total-cell {
+  grid-column: auto !important;
+}
+
+@media (max-width: 900px) {
+  #stepContent .flat-workspace-left .mi-cost-column-head { display: none !important; }
+  #stepContent .flat-workspace-left .mi-cost-row,
+  #stepContent .flat-workspace-left .mi-cost-section-total {
+    grid-template-columns: 1fr !important;
+    row-gap: 8px !important;
+  }
+  #stepContent .flat-workspace-left .mi-cost-section-total-name {
+    grid-column: auto !important;
+    text-align: left !important;
+  }
+}

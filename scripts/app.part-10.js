@@ -387,3 +387,68 @@
     setTimeout(function(){ installStyle(); wrapRenderFlatPosition(); postProcessDom(); }, 0);
   }
 })();
+
+
+// ===== MarginIQ DOM refinement v7: visible position title, no Input heading, left-side distribution, output-like input cards =====
+(function(){
+  function patchMarginIqDomV7(){
+    document.querySelectorAll('.flat-workspace-position').forEach(function(pos){
+      var title = pos.querySelector('.flat-workspace-header h4');
+      if (title) {
+        title.style.setProperty('font-size','20px','important');
+        title.style.setProperty('line-height','1.25','important');
+        title.style.setProperty('font-weight','900','important');
+        title.style.setProperty('color','#1A497F','important');
+        title.style.setProperty('margin','0','important');
+      }
+
+      var left = pos.querySelector('.flat-workspace-left');
+      var right = pos.querySelector('.flat-workspace-right');
+      if (left) {
+        left.style.setProperty('border','0','important');
+        left.style.setProperty('background','transparent','important');
+        left.style.setProperty('box-shadow','none','important');
+        left.style.setProperty('padding','0','important');
+        left.style.setProperty('overflow','visible','important');
+        left.style.setProperty('max-height','none','important');
+        var leftTitle = left.querySelector('.flat-workspace-panel-title');
+        if (leftTitle) leftTitle.textContent = 'Inputs';
+        left.querySelectorAll('.flat-subsection-head').forEach(function(el){ el.style.setProperty('display','none','important'); });
+        left.querySelectorAll('.flat-basics-title').forEach(function(el){ el.style.setProperty('display','none','important'); });
+        left.querySelectorAll('.flat-basics-group-title').forEach(function(el){ if (el.textContent.trim() === 'Entered details') el.textContent = 'Basics'; });
+      }
+      if (right) {
+        var outTitle = right.querySelector('.flow-results > h3');
+        if (outTitle) outTitle.textContent = 'Outputs';
+        var calc = right.querySelector('.flat-calculated-output-panel');
+        var flow = right.querySelector('.flow-results');
+        if (calc && flow && outTitle && calc.previousElementSibling !== outTitle) {
+          flow.insertBefore(calc, outTitle.nextSibling);
+        }
+      }
+      if (left) {
+        var days = pos.querySelector('.days-distribution-card');
+        if (days && !left.contains(days)) {
+          var inputBreakdown = left.querySelector('.flat-input-breakdown');
+          if (inputBreakdown) left.insertBefore(days, inputBreakdown);
+          else left.appendChild(days);
+        }
+        left.querySelectorAll('.days-distribution-title').forEach(function(el){ el.textContent = 'distribution of days'; });
+      }
+    });
+  }
+
+  window.patchMarginIqDomV7 = patchMarginIqDomV7;
+  document.addEventListener('DOMContentLoaded', patchMarginIqDomV7);
+  window.addEventListener('load', patchMarginIqDomV7);
+  setTimeout(patchMarginIqDomV7, 0);
+  setTimeout(patchMarginIqDomV7, 250);
+  setTimeout(patchMarginIqDomV7, 1000);
+  document.addEventListener('input', function(){ setTimeout(patchMarginIqDomV7, 0); }, true);
+  document.addEventListener('change', function(){ setTimeout(patchMarginIqDomV7, 0); }, true);
+  document.addEventListener('click', function(){ setTimeout(patchMarginIqDomV7, 0); }, true);
+  try {
+    var observer = new MutationObserver(function(){ patchMarginIqDomV7(); });
+    observer.observe(document.getElementById('stepContent') || document.body, {childList:true, subtree:true});
+  } catch(e) {}
+})();
