@@ -13,10 +13,10 @@
     return String(value == null ? '' : value).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
   }
   function inputCell(label, p, idx, field, rowLabel, placeholder){
-    return '<div class="mi-cost-field"><label>' + label + '</label><input type="text" inputmode="decimal" class="flat-input formatted-number-input" data-idx="' + idx + '" data-field="' + field + '" value="' + escAttr(plain(p[field])) + '" placeholder="' + placeholder + '" aria-label="' + label + ' for ' + escAttr(rowLabel) + '"></div>';
+    return '<div class="mi-cost-field"><input type="text" inputmode="decimal" class="flat-input formatted-number-input" data-idx="' + idx + '" data-field="' + field + '" value="' + escAttr(plain(p[field])) + '" placeholder="' + placeholder + '" aria-label="' + label + ' for ' + escAttr(rowLabel) + '"></div>';
   }
   function amountCell(idx, key, amount, isPercent){
-    return '<div class="mi-cost-total-cell"><div class="mi-cost-total-label">Total</div><div class="mi-cost-total" id="component-total-' + idx + '-' + key + '">' + (isPercent ? escAttr(plain(amount)) + '%' : moneySafe(amount)) + '</div></div>';
+    return '<div class="mi-cost-total-cell"><div class="mi-cost-total" id="component-total-' + idx + '-' + key + '">' + (isPercent ? escAttr(plain(amount)) + '%' : moneySafe(amount)) + '</div></div>';
   }
   function normalRow(row, p, idx, number){
     return '<div class="mi-cost-row">' +
@@ -29,14 +29,18 @@
   function percentRow(row, p, idx, number){
     return '<div class="mi-cost-row mi-cost-percent-row">' +
       '<div class="mi-cost-label-cell"><span class="mi-cost-index">' + number + '</span><div class="mi-cost-name">' + row.label + '</div></div>' +
-      '<div class="mi-cost-field"><label>Rate</label><div class="mi-rate-wrap"><input type="text" inputmode="decimal" class="flat-input formatted-number-input" data-idx="' + idx + '" data-field="' + row.rateField + '" value="' + escAttr(plain(p[row.rateField])) + '" placeholder="0" aria-label="Rate for ' + escAttr(row.label) + '"><span class="mi-rate-suffix">%</span></div></div>' +
+      '<div class="mi-cost-field"><div class="mi-rate-wrap"><input type="text" inputmode="decimal" class="flat-input formatted-number-input" data-idx="' + idx + '" data-field="' + row.rateField + '" value="' + escAttr(plain(p[row.rateField])) + '" placeholder="0" aria-label="Rate for ' + escAttr(row.label) + '"><span class="mi-rate-suffix">%</span></div></div>' +
       amountCell(idx, row.key, row.total, true) +
     '</div>';
   }
   function sectionHtml(section, p, idx){
+    var isPercent = section.rows.some(function(row){ return row.special === 'percent'; });
     var rows = section.rows.map(function(row, i){ return row.special === 'percent' ? percentRow(row, p, idx, i + 1) : normalRow(row, p, idx, i + 1); }).join('');
+    var header = isPercent
+      ? '<div class="mi-cost-column-head mi-cost-column-head-percent"><div></div><div>Rate</div><div>Total</div></div>'
+      : '<div class="mi-cost-column-head"><div></div><div>Quantity</div><div>Rate</div><div>Total</div></div>';
     var total = section.totalValue == null ? '' : '<div class="mi-cost-section-total"><div class="mi-cost-section-total-name">Section total</div><div class="mi-cost-section-total-value">' + moneySafe(section.totalValue) + '</div></div>';
-    return '<section class="mi-cost-section"><div class="mi-cost-section-head"><h4 class="mi-cost-section-title">' + section.title + '</h4></div><div class="mi-cost-rows">' + rows + '</div>' + total + '</section>';
+    return '<section class="mi-cost-section"><div class="mi-cost-section-head"><h4 class="mi-cost-section-title">' + section.title + '</h4></div>' + header + '<div class="mi-cost-rows">' + rows + '</div>' + total + '</section>';
   }
   window.renderSmartComponentRows = function(p, c, idx){
     var sections = [

@@ -1810,42 +1810,37 @@ body:not(.is-intro) .flat-summary-totals > div{
 }
 
 
-/* MarginIQ layout patch v3 */
-#stepContent .flow-results > h3 + .flat-calculated-output-panel,
-.flow-results > h3 + .flat-calculated-output-panel {
-  display: block !important;
-  order: -999 !important;
-  margin: 12px 0 16px 0 !important;
-}
+/* MarginIQ active layout patch v4: no input scroll, one header row for quantity/rate, Calculated details first in Output */
 #stepContent .flat-workspace-shell,
-.flat-workspace-shell {
-  align-items: start !important;
-  overflow: visible !important;
-}
+.flat-workspace-shell { align-items:start!important; overflow:visible!important; }
 #stepContent .flat-workspace-left,
 .flat-workspace-left {
-  max-height: none !important;
-  height: auto !important;
-  overflow-y: visible !important;
-  overflow-x: visible !important;
-  overflow: visible !important;
-  position: static !important;
+  position:relative!important;
+  top:auto!important;
+  max-height:none!important;
+  height:auto!important;
+  overflow:visible!important;
 }
 #stepContent .flat-workspace-right,
-.flat-workspace-right {
-  overflow: visible !important;
+.flat-workspace-right { overflow:visible!important; }
+.flat-workspace-left .mi-cost-field label,
+.flat-workspace-left .mi-cost-total-label,
+.flat-workspace-left .component-field-label,
+.flat-workspace-left .component-mobile-label { display:none!important; }
+.mi-cost-column-head{
+  display:grid!important;
+  grid-template-columns:minmax(220px,1fr) minmax(116px,150px) minmax(116px,150px) minmax(128px,170px)!important;
+  gap:14px!important;
+  padding:10px 18px 8px!important;
+  border-bottom:1px solid #eef2f7!important;
+  background:#fbfdff!important;
+  color:#64748b!important;
+  font-size:12px!important;
+  line-height:1.2!important;
+  font-weight:900!important;
 }
-.flat-workspace-left .component-mobile-label,
-.flat-workspace-left .component-field-label {
-  display: none !important;
-}
-.flat-workspace-left .component-colhead .component-hlabel {
-  display: block !important;
-  text-align: center !important;
-  font-size: 12px !important;
-  font-weight: 900 !important;
-  color: #64748b !important;
-}
-.flat-workspace-left .component-input-cell input::placeholder {
-  color: transparent !important;
-}
+.mi-cost-column-head > div{text-align:right!important;}
+.mi-cost-column-head > div:first-child{text-align:left!important;}
+.mi-cost-column-head-percent{grid-template-columns:minmax(220px,1fr) minmax(116px,150px) minmax(128px,170px)!important;}
+.flat-workspace-right .flat-calculated-output-panel{margin:0 0 14px 0!important;}
+@media (max-width:760px){.mi-cost-column-head{display:none!important;}}

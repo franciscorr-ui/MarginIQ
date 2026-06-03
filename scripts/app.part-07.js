@@ -38,7 +38,7 @@
     calculated += field('Contracting entity', computedEntity);
     calculated += field('VAT jurisdiction', '<input id="computed-vat-jurisdiction-' + idx + '" value="' + esc(derivedCalculationValue(displayVatJurisdiction(deriveVatJurisdiction(p)))) + '" class="flat-input auto-derived-select' + derivedCalculationClass(deriveVatJurisdiction(p)) + '" placeholder="Pending calculation" readonly>');
 
-    return '<div class="details-panel flat-basics-panel"><div class="flat-basics-head"><h4 class="flat-basics-title">Basics</h4></div><div class="flat-basics-body">' + basicGroup('Entered details', entered, 'flat-basics-entered') + basicGroup('Calculated details', calculated, 'flat-basics-calculated') + '</div></div>';
+    return '<div class="details-panel flat-basics-panel"><div class="flat-basics-head"><h4 class="flat-basics-title">Basics</h4></div><div class="flat-basics-body">' + basicGroup('Entered details', entered, 'flat-basics-entered') + '</div></div>';
   };
 
   function norm(value){ return String(value || '').trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, ''); }
