@@ -2399,13 +2399,13 @@ function renderSmartComponentRows(p, c, idx){
     return `
     <tr class="component-line"><td><div class="invoice-label"><div class="invoice-kicker">${row.kicker}</div><div class="invoice-name">${row.label}</div>
           ${row.note ? `<div class="invoice-note">${row.note}</div>` : ''}
-        </div></td><td><div class="component-editor"><div class="component-input-cell"><label class="component-mobile-label">Qty</label><input type="text" inputmode="decimal" class="flat-input formatted-number-input" data-idx="${idx}" data-field="${row.qtyField}" value="${formatPlainNumber(p[row.qtyField])}" placeholder="Qty" aria-label="Quantity for ${row.label}"></div><div class="component-input-cell"><label class="component-mobile-label">Rate</label><input type="text" inputmode="decimal" class="flat-input formatted-number-input" data-idx="${idx}" data-field="${row.rateField}" value="${formatPlainNumber(p[row.rateField])}" placeholder="Rate" aria-label="Rate for ${row.label}"></div><div class="component-total-wrap"><div class="component-total" id="component-total-${idx}-${row.key}">${money(row.total)}</div></div></div></td></tr>`;
+        </div></td><td><div class="component-editor"><div class="component-input-cell"><input type="text" inputmode="decimal" class="flat-input formatted-number-input" data-idx="${idx}" data-field="${row.qtyField}" value="${formatPlainNumber(p[row.qtyField])}" placeholder="0" aria-label="Quantity for ${row.label}"></div><div class="component-input-cell"><input type="text" inputmode="decimal" class="flat-input formatted-number-input" data-idx="${idx}" data-field="${row.rateField}" value="${formatPlainNumber(p[row.rateField])}" placeholder="0" aria-label="Rate for ${row.label}"></div><div class="component-total-wrap"><div class="component-total" id="component-total-${idx}-${row.key}">${money(row.total)}</div></div></div></td></tr>`;
   };
 
   return `<div class="flat-subsection-head"><h4 class="flat-subsection-title">Input</h4></div><div class="component-breakdown flat-input-breakdown">` + sections.map(section => {
     const body = section.rows.map(row => renderLine(row)).join("");
 
-    return `<div class="component-section"><div class="invoice-head"><div class="invoice-title">${section.title}</div>${section.subtitle ? `<div class="invoice-sub">${section.subtitle}</div>` : ``}</div><table class="component-table"><colgroup><col><col></colgroup><tbody><tr class="component-colhead"><td></td><td><div class="component-editor ${section.rows.some(r => r.special === "percent") ? "component-editor-margin" : ""}"><div class="component-hlabel">${section.rows.some(r => r.special === "percent") ? "" : "Qty"}</div><div class="component-hlabel">${section.rows.some(r => r.special === "percent") ? "Rate" : "Rate"}</div><div class="component-total-spacer"></div></div></td></tr>
+    return `<div class="component-section"><div class="invoice-head"><div class="invoice-title">${section.title}</div>${section.subtitle ? `<div class="invoice-sub">${section.subtitle}</div>` : ``}</div><table class="component-table"><colgroup><col><col></colgroup><tbody><tr class="component-colhead"><td></td><td><div class="component-editor ${section.rows.some(r => r.special === "percent") ? "component-editor-margin" : ""}"><div class="component-hlabel">${section.rows.some(r => r.special === "percent") ? "" : "Quantity"}</div><div class="component-hlabel">Rate</div><div class="component-hlabel component-total-spacer">Total</div></div></td></tr>
           ${body}
           ${section.totalValue === null ? "" : `
           <tr class="component-line total"><td><div class="invoice-label"><div class="invoice-name">Section total</div></div></td><td><div class="component-editor"><div></div><div></div><div class="component-total-wrap"><div class="component-total">${money(section.totalValue)}</div></div></div></td></tr>`}
@@ -2521,25 +2521,7 @@ function renderPositionDetails(p, idx){
       ${field("Input mode", `<div><select data-idx="${idx}" data-field="inputMode" class="flat-input">${INPUT_MODES.map(v=>`<option ${v===p.inputMode?'selected':''}>${v}</option>`).join("")}</select>${(p.inputMode && String(p.inputMode).toLowerCase() !== "gross") ? `<div class="inline-warning">It is recommendable to always negotiate gross. Continue only if you are sure.</div>` : ``}</div>`)}
   `;
 
-  const contractingEntityField = `
-        <div class="ce-overwrite-wrap ${hasContractingEntityOverwrite(p) ? 'is-overwritten' : ''}"><div class="ce-overwrite-top"><div class="ce-input-with-gear"><input id="computed-contracting-entity-${idx}" value="${esc(getEffectiveContractingEntity(p))}" class="flat-input ce-overwrite-input auto-derived-select" placeholder="Computed from implementation mode and residence" readonly><button type="button" class="ce-gear-btn" onclick="handleContractingEntityGearClick(${idx})" title="Overwrite" aria-label="Overwrite">⚙</button></div></div>
-          ${hasContractingEntityOverwrite(p)
-            ? `
-              <div class="ce-overwrite-meta"><span class="ce-overwrite-badge">Overwritten</span><div class="ce-overwrite-note">Auto: <strong>${esc(getAutoContractingEntity(p) || "—")}</strong> → Current: <strong>${esc(getEffectiveContractingEntity(p) || "—")}</strong></div><div class="ce-overwrite-note">Reason: ${esc(p.contractingEntityOverwriteReasonCode || "—")}</div><div class="ce-overwrite-actions"><button type="button" class="small secondary" onclick="resetContractingEntityOverwrite(${idx})">Reset to automatic</button></div></div>
-            `
-            : `<div class="mini-note">Assigned automatically from implementation mode and residence.</div>`
-          }
-        </div>
-      `;
-
-  const calculatedDetails = `
-      ${field("ITR country", flatCountryInputHtml(getImplementationCountryForPosition(), `id="computed-ITR-country-${idx}"`, `placeholder="From backstage ITR country" readonly`, "auto-derived-select"))}
-      ${field("Tax status", `<input id="computed-tax-status-${idx}" value="${esc(derivedCalculationValue(deriveTaxStatus(p)))}" class="flat-input auto-derived-select${derivedCalculationClass(deriveTaxStatus(p))}" placeholder="Pending calculation" readonly>`)}
-      ${field("Contracting entity", contractingEntityField)}
-      ${field("VAT jurisdiction", `<input id="computed-vat-jurisdiction-${idx}" value="${esc(derivedCalculationValue(displayVatJurisdiction(deriveVatJurisdiction(p))))}" class="flat-input auto-derived-select${derivedCalculationClass(deriveVatJurisdiction(p))}" placeholder="Pending calculation" readonly>`)}
-  `;
-
-  return `<div class="details-panel flat-basics-panel"><div class="flat-basics-head"><h4 class="flat-basics-title">Basics</h4></div><div class="flat-basics-body">${flatBasicsGroup("Entered details", enteredDetails, "flat-basics-entered")}${flatBasicsGroup("Calculated details", calculatedDetails, "flat-basics-calculated")}</div></div>`;
+  return `<div class="details-panel flat-basics-panel"><div class="flat-basics-head"><h4 class="flat-basics-title">Basics</h4></div><div class="flat-basics-body">${flatBasicsGroup("Entered details", enteredDetails, "flat-basics-entered")}</div></div>`;
 }
 
 function renderFlatPosition(p, idx){

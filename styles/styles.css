@@ -1730,3 +1730,46 @@ body:not(.is-intro) .flat-summary-totals > div{
   font-weight: 900 !important;
   color: var(--accent) !important;
 }
+
+/* MarginIQ patch: requested input/output layout refinements */
+@media (min-width:1101px){
+  #stepContent .flat-workspace-left{
+    position:relative!important;
+    top:auto!important;
+    max-height:none!important;
+    overflow:visible!important;
+  }
+}
+
+/* Show Quantity / Rate / Total once at the top of each input section. */
+#stepContent .flat-workspace-left .flat-input-breakdown .component-colhead{
+  display:block!important;
+}
+#stepContent .flat-workspace-left .flat-input-breakdown .component-colhead td{
+  display:block!important;
+  width:100%!important;
+  padding:0 0 8px 28px!important;
+  border-bottom:1px solid #eef2f7!important;
+}
+#stepContent .flat-workspace-left .flat-input-breakdown .component-colhead .component-editor,
+#stepContent .flat-workspace-left .flat-input-breakdown .component-colhead .component-editor.component-editor-margin{
+  display:grid!important;
+  grid-template-columns:1fr 1fr 1fr!important;
+  column-gap:10px!important;
+  align-items:center!important;
+  justify-content:stretch!important;
+}
+#stepContent .flat-workspace-left .flat-input-breakdown .component-hlabel{
+  display:block!important;
+  padding:0!important;
+  color:#64748b!important;
+  font-size:12px!important;
+  font-weight:800!important;
+  text-align:right!important;
+}
+#stepContent .flat-workspace-left .flat-input-breakdown .component-hlabel:first-child{
+  text-align:left!important;
+}
+#stepContent .flat-workspace-left .flat-input-breakdown .component-line .component-mobile-label{
+  display:none!important;
+}
