@@ -1117,7 +1117,7 @@ function buildContractHtml(p, idx){
     ];
 
     function inputWithLabel(label, html){
-      return '<div><span class="component-field-label">' + label + '</span>' + html + '</div>';
+      return '<div class="component-input-cell">' + html + '</div>';
     }
     function renderLine(row){
       if (row.special === 'percent'){
@@ -2399,7 +2399,7 @@ function renderSmartComponentRows(p, c, idx){
     return `
     <tr class="component-line"><td><div class="invoice-label"><div class="invoice-kicker">${row.kicker}</div><div class="invoice-name">${row.label}</div>
           ${row.note ? `<div class="invoice-note">${row.note}</div>` : ''}
-        </div></td><td><div class="component-editor"><div class="component-input-cell"><input type="text" inputmode="decimal" class="flat-input formatted-number-input" data-idx="${idx}" data-field="${row.qtyField}" value="${formatPlainNumber(p[row.qtyField])}" placeholder="Qty" aria-label="Quantity for ${row.label}"></div><div class="component-input-cell"><input type="text" inputmode="decimal" class="flat-input formatted-number-input" data-idx="${idx}" data-field="${row.rateField}" value="${formatPlainNumber(p[row.rateField])}" placeholder="Rate" aria-label="Rate for ${row.label}"></div><div class="component-total-wrap"><div class="component-total" id="component-total-${idx}-${row.key}">${money(row.total)}</div></div></div></td></tr>`;
+        </div></td><td><div class="component-editor"><div class="component-input-cell"><input type="text" inputmode="decimal" class="flat-input formatted-number-input" data-idx="${idx}" data-field="${row.qtyField}" value="${formatPlainNumber(p[row.qtyField])}" aria-label="Quantity for ${row.label}"></div><div class="component-input-cell"><input type="text" inputmode="decimal" class="flat-input formatted-number-input" data-idx="${idx}" data-field="${row.rateField}" value="${formatPlainNumber(p[row.rateField])}" aria-label="Rate for ${row.label}"></div><div class="component-total-wrap"><div class="component-total" id="component-total-${idx}-${row.key}">${money(row.total)}</div></div></div></td></tr>`;
   };
 
   return `<div class="flat-subsection-head"><h4 class="flat-subsection-title">Input</h4></div><div class="component-breakdown flat-input-breakdown">` + sections.map(section => {
@@ -7835,6 +7835,65 @@ document.addEventListener('click', function(event){
     `;
     var style = document.createElement('style');
     style.setAttribute('id', 'marginiq-output-input-layout-runtime-fix-v2');
+    style.appendChild(document.createTextNode(css));
+    document.head.appendChild(style);
+  } catch (_) {}
+})();
+
+
+/* ==========================================================================
+   Runtime layout patch v3 | force current asset + requested input/output layout
+   ========================================================================== */
+(function(){
+  try {
+    var existing = document.getElementById('marginiq-output-input-layout-runtime-fix-v3');
+    if (existing) existing.remove();
+    var css = `
+      #stepContent .flow-results > h3 + .flat-calculated-output-panel,
+      .flow-results > h3 + .flat-calculated-output-panel {
+        display: block !important;
+        order: -999 !important;
+        margin: 12px 0 16px 0 !important;
+      }
+      #stepContent .flat-workspace-shell,
+      .flat-workspace-shell {
+        align-items: start !important;
+        overflow: visible !important;
+      }
+      #stepContent .flat-workspace-left,
+      .flat-workspace-left {
+        max-height: none !important;
+        height: auto !important;
+        overflow-y: visible !important;
+        overflow-x: visible !important;
+        overflow: visible !important;
+        position: static !important;
+      }
+      #stepContent .flat-workspace-right,
+      .flat-workspace-right {
+        overflow: visible !important;
+      }
+      .flat-workspace-left .component-mobile-label,
+      .flat-workspace-left .component-field-label {
+        display: none !important;
+      }
+      .flat-workspace-left .component-colhead,
+      .flat-workspace-left .component-colhead td {
+        display: table-row !important;
+      }
+      .flat-workspace-left .component-colhead .component-hlabel {
+        display: block !important;
+        text-align: center !important;
+        font-size: 12px !important;
+        font-weight: 900 !important;
+        color: #64748b !important;
+      }
+      .flat-workspace-left .component-input-cell input::placeholder {
+        color: transparent !important;
+      }
+    `;
+    var style = document.createElement('style');
+    style.setAttribute('id', 'marginiq-output-input-layout-runtime-fix-v3');
     style.appendChild(document.createTextNode(css));
     document.head.appendChild(style);
   } catch (_) {}
