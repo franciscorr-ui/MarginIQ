@@ -2351,6 +2351,301 @@ function buildContractHtml(p, idx){
 })();
 <\/script>
 
+
+
+<style id="mi-equal-row-grid-v7">
+/* Equal-row visual grid: all input and output cards use one 48px row rhythm. */
+#stepContent{
+  --mi-grid-row:48px;
+  --mi-card-head:48px;
+  --mi-grid-line:#eef2f7;
+}
+#stepContent .flat-workspace-shell{
+  align-items:start!important;
+}
+#stepContent .flat-workspace-left{
+  position:relative!important;
+  top:auto!important;
+  max-height:none!important;
+  overflow:visible!important;
+}
+#stepContent .flat-workspace-left,
+#stepContent .flat-workspace-right{
+  align-self:start!important;
+}
+#stepContent .flat-basics-body,
+#stepContent .flat-workspace-left .mi-cost-breakdown,
+#stepContent .flow-results .invoice-breakdown{
+  display:grid!important;
+  gap:12px!important;
+}
+#stepContent .invoice-breakdown{
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  overflow:visible!important;
+}
+#stepContent .invoice-section,
+#stepContent .mi-cost-section,
+#stepContent .flat-basics-group,
+#stepContent .mi-calculated-output-section{
+  border:1px solid var(--line)!important;
+  border-radius:14px!important;
+  background:#fff!important;
+  overflow:hidden!important;
+  margin:0!important;
+}
+#stepContent .invoice-section + .invoice-section{
+  border-top:1px solid var(--line)!important;
+}
+#stepContent .flat-basics-group-head,
+#stepContent .mi-cost-section-head,
+#stepContent .mi-calculated-output-head,
+#stepContent .invoice-section > .invoice-head{
+  min-height:var(--mi-card-head)!important;
+  height:var(--mi-card-head)!important;
+  margin:0!important;
+  padding:0 16px!important;
+  border-bottom:1px solid var(--line)!important;
+  background:#fff!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:flex-start!important;
+}
+#stepContent .invoice-sub{display:none!important;}
+#stepContent .invoice-title,
+#stepContent .flat-basics-group-title,
+#stepContent .mi-cost-section-title,
+#stepContent .mi-calculated-output-title{
+  margin:0!important;
+  color:#1A497F!important;
+  font-size:14px!important;
+  line-height:1!important;
+  font-weight:900!important;
+  letter-spacing:.12em!important;
+  text-transform:uppercase!important;
+}
+#stepContent .flat-basics-grid{
+  display:grid!important;
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  gap:0!important;
+  padding:0!important;
+  background:#fff!important;
+}
+#stepContent .flat-basics-grid > div,
+#stepContent .flat-basics-grid > .mi-empty-input-cell{
+  min-height:var(--mi-grid-row)!important;
+  height:var(--mi-grid-row)!important;
+  padding:4px 10px!important;
+  display:flex!important;
+  flex-direction:column!important;
+  justify-content:center!important;
+  border-bottom:1px solid var(--mi-grid-line)!important;
+  min-width:0!important;
+}
+#stepContent .flat-basics-grid > div:nth-child(odd){border-right:1px solid var(--mi-grid-line)!important;}
+#stepContent .flat-basics-grid > div:nth-last-child(-n+2){border-bottom:0!important;}
+#stepContent .flat-basics-grid label{
+  font-size:9px!important;
+  line-height:1.1!important;
+  margin:0 0 3px 0!important;
+  font-weight:800!important;
+}
+#stepContent .flat-basics-grid input,
+#stepContent .flat-basics-grid select{
+  height:30px!important;
+  min-height:30px!important;
+  padding:3px 10px!important;
+  border-radius:9px!important;
+  font-size:12px!important;
+}
+#stepContent .mi-cost-column-head,
+#stepContent .mi-cost-row,
+#stepContent .mi-cost-section-total,
+#stepContent .mi-calculated-output-table tr,
+#stepContent .invoice-table tr,
+#stepContent .mi-grid-blank-row{
+  min-height:var(--mi-grid-row)!important;
+  height:var(--mi-grid-row)!important;
+}
+#stepContent .mi-cost-column-head,
+#stepContent .mi-cost-row,
+#stepContent .mi-cost-section-total{
+  padding-top:0!important;
+  padding-bottom:0!important;
+  align-items:center!important;
+}
+#stepContent .mi-cost-row{border-bottom:1px solid var(--mi-grid-line)!important;}
+#stepContent .mi-cost-section-total{border-top:0!important;border-bottom:0!important;background:#f8fbff!important;}
+#stepContent .mi-cost-field input,
+#stepContent .mi-rate-wrap input{
+  height:34px!important;
+  min-height:34px!important;
+  padding-top:4px!important;
+  padding-bottom:4px!important;
+}
+#stepContent .mi-rate-wrap{
+  position:relative!important;
+  display:flex!important;
+  align-items:center!important;
+}
+#stepContent .mi-rate-wrap input{
+  padding-right:26px!important;
+  text-align:right!important;
+}
+#stepContent .mi-rate-suffix{
+  position:absolute!important;
+  right:10px!important;
+  top:50%!important;
+  transform:translateY(-50%)!important;
+  pointer-events:none!important;
+  color:#334155!important;
+  font-weight:800!important;
+}
+#stepContent .mi-calculated-output-table td,
+#stepContent .invoice-line td{
+  height:var(--mi-grid-row)!important;
+  min-height:var(--mi-grid-row)!important;
+  padding-top:0!important;
+  padding-bottom:0!important;
+  vertical-align:middle!important;
+  border-bottom:1px solid var(--mi-grid-line)!important;
+}
+#stepContent .invoice-line:last-child td,
+#stepContent .mi-calculated-output-table tr:last-child td{border-bottom:0!important;}
+#stepContent .invoice-line.total td,
+#stepContent .invoice-line.final td{
+  background:#fff!important;
+  border-top:0!important;
+}
+#stepContent .invoice-label{
+  display:flex!important;
+  min-height:var(--mi-grid-row)!important;
+  align-items:center!important;
+  justify-content:center!important;
+}
+#stepContent .invoice-name{
+  background:#fff!important;
+}
+#stepContent .invoice-amount{
+  background:transparent!important;
+  box-shadow:none!important;
+}
+#stepContent .mi-grid-blank-row td,
+#stepContent .mi-grid-blank-row .invoice-name,
+#stepContent .mi-grid-blank-row .invoice-amount,
+#stepContent .mi-cost-empty-row{
+  color:transparent!important;
+}
+#stepContent .mi-grid-blank-row{counter-increment:none!important;}
+#stepContent .mi-grid-blank-row .invoice-label::before{display:none!important;content:""!important;}
+#stepContent .mi-cost-empty-row{
+  display:grid!important;
+  grid-template-columns:minmax(170px,1.25fr) minmax(92px,.55fr) minmax(104px,.6fr) minmax(120px,.8fr)!important;
+  gap:12px!important;
+  min-height:var(--mi-grid-row)!important;
+  height:var(--mi-grid-row)!important;
+  border-bottom:1px solid var(--mi-grid-line)!important;
+  background:#fff!important;
+}
+@media (max-width:700px){
+  #stepContent .flat-basics-grid{grid-template-columns:1fr!important;}
+  #stepContent .flat-basics-grid > div:nth-child(odd){border-right:0!important;}
+  #stepContent .flat-basics-grid > div:nth-last-child(-n+2){border-bottom:1px solid var(--mi-grid-line)!important;}
+  #stepContent .flat-basics-grid > div:last-child{border-bottom:0!important;}
+}
+</style>
+<script id="mi-equal-row-grid-v7-script">
+(function(){
+  function addBlankInputCells(){
+    document.querySelectorAll('#stepContent .flat-basics-grid').forEach(function(grid){
+      if (grid.dataset.miEqualRowsDone === '1') return;
+      var cells = Array.prototype.slice.call(grid.children).filter(function(el){ return !el.classList.contains('mi-empty-input-cell'); });
+      var columns = window.innerWidth <= 700 ? 1 : 2;
+      var remainder = cells.length % columns;
+      var needed = remainder ? (columns - remainder) : 0;
+      // Basics has six fields; add one full visual row so it matches the four calculated-detail rows on the right.
+      if (columns === 2 && cells.length === 6) needed += 2;
+      for (var i=0; i<needed; i++){
+        var blank = document.createElement('div');
+        blank.className = 'mi-empty-input-cell';
+        blank.setAttribute('aria-hidden','true');
+        grid.appendChild(blank);
+      }
+      grid.dataset.miEqualRowsDone = '1';
+    });
+  }
+  function blankInvoiceRow(){
+    var tr = document.createElement('tr');
+    tr.className = 'invoice-line mi-grid-blank-row';
+    tr.setAttribute('aria-hidden','true');
+    tr.innerHTML = '<td><div class="invoice-label"><div class="invoice-name">&nbsp;</div></div></td><td class="invoice-amount-cell"><div class="invoice-amount">&nbsp;</div></td>';
+    return tr;
+  }
+  function ensureBlankRows(tbody, targetRows){
+    if (!tbody) return;
+    Array.prototype.slice.call(tbody.querySelectorAll('tr.mi-grid-blank-row')).forEach(function(r){ r.remove(); });
+    var realRows = tbody.querySelectorAll('tr:not(.mi-grid-blank-row)').length;
+    for (var i=realRows; i<targetRows; i++) tbody.appendChild(blankInvoiceRow());
+  }
+  function equalizeOutputCards(){
+    document.querySelectorAll('#stepContent .flow-results .invoice-section').forEach(function(section, index){
+      var tbody = section.querySelector('tbody');
+      if (!tbody) return;
+      if (index === 0) ensureBlankRows(tbody, 5);       // Matches left Provider remuneration: column header + 3 rows + total.
+      else if (index === 1) ensureBlankRows(tbody, 6);  // Matches left Non-remuneration costs: column header + 4 rows + total.
+      else if (index === 2) ensureBlankRows(tbody, 4);  // Keeps Deductions on the same row rhythm.
+      else if (index === 3) ensureBlankRows(tbody, 4);  // Keeps Cash flows and margin on the same row rhythm.
+    });
+  }
+  function equalizeLeftCards(){
+    document.querySelectorAll('#stepContent .mi-cost-section').forEach(function(section){
+      Array.prototype.slice.call(section.querySelectorAll('.mi-cost-empty-row')).forEach(function(r){ r.remove(); });
+      var title = (section.querySelector('.mi-cost-section-title') || {}).textContent || '';
+      if (/^Margin$/i.test(title.trim())){
+        var rowsBox = section.querySelector('.mi-cost-rows');
+        if (rowsBox){
+          var current = rowsBox.querySelectorAll('.mi-cost-row').length;
+          for (var i=current; i<3; i++){
+            var blank = document.createElement('div');
+            blank.className = 'mi-cost-empty-row';
+            blank.setAttribute('aria-hidden','true');
+            blank.innerHTML = '<div></div><div></div><div></div><div></div>';
+            rowsBox.appendChild(blank);
+          }
+        }
+      }
+    });
+  }
+  function applyEqualRows(){
+    addBlankInputCells();
+    equalizeOutputCards();
+    equalizeLeftCards();
+  }
+  var oldRenderFlat = window.renderFlatPosition || (typeof renderFlatPosition === 'function' ? renderFlatPosition : null);
+  if (oldRenderFlat && !oldRenderFlat.__miEqualRowsWrapped){
+    var wrapped = function(){
+      var result = oldRenderFlat.apply(this, arguments);
+      setTimeout(applyEqualRows, 0);
+      return result;
+    };
+    wrapped.__miEqualRowsWrapped = true;
+    window.renderFlatPosition = wrapped;
+    try { renderFlatPosition = wrapped; } catch(_) {}
+  }
+  document.addEventListener('input', function(){ setTimeout(applyEqualRows, 0); }, true);
+  document.addEventListener('change', function(){ setTimeout(applyEqualRows, 0); }, true);
+  window.addEventListener('resize', function(){
+    document.querySelectorAll('#stepContent .flat-basics-grid').forEach(function(grid){
+      grid.dataset.miEqualRowsDone = '0';
+      Array.prototype.slice.call(grid.querySelectorAll('.mi-empty-input-cell')).forEach(function(cell){ cell.remove(); });
+    });
+    setTimeout(applyEqualRows, 0);
+  });
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', applyEqualRows); else applyEqualRows();
+})();
+</script>
+
 </body></html>`;
 }
 
@@ -4343,8 +4638,7 @@ function updateFlatPositionCalculatedOutputs(idx){
     Transfer: c.transfer,
     NotPartRemuneration: c.notPartOfRemuneration || c.nonRemunerationTotal,
     CompanyCost: c.companyCost,
-    Revenue: c.revenue,
-    MarginAmount: c.margin
+    Revenue: c.revenue
   };
 
   Object.entries(metricValues).forEach(([key, value]) => {
@@ -10484,78 +10778,297 @@ body:not(.is-intro) .flat-summary-totals > div{
 </script>
 
 
-<style id="mi-final-input-output-alignment-v7">
-#stepContent .flat-workspace-shell{align-items:start!important;gap:20px!important;}
-@media (min-width:1101px){#stepContent .flat-workspace-shell{grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;}}
-#stepContent .flat-workspace-left{position:relative!important;top:auto!important;max-height:none!important;overflow:visible!important;padding:0!important;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;}
-#stepContent .flat-workspace-panel-title,#stepContent .flat-workspace-right .flow-results>h3{margin:0 0 12px 0!important;padding:0!important;border:0!important;color:#0f172a!important;font-size:20px!important;line-height:1.2!important;font-weight:900!important;letter-spacing:0!important;text-transform:none!important;}
-#stepContent .flat-workspace-left .details-panel,#stepContent .flat-workspace-left .component-breakdown,#stepContent .flat-workspace-left .days-distribution-card,#stepContent .flat-workspace-right .flat-calculated-output-panel,#stepContent .flat-workspace-right .invoice-breakdown,#stepContent .flat-workspace-right .ctv5-panel{margin:0 0 14px 0!important;border:1px solid var(--line)!important;border-radius:16px!important;background:#fff!important;overflow:hidden!important;box-shadow:none!important;}
-#stepContent .flat-workspace-left .details-panel,#stepContent .flat-workspace-right .flat-calculated-output-panel{padding:0!important;}
-#stepContent .flat-basics-head,#stepContent .days-distribution-head,#stepContent .mi-simple-section-head,#stepContent .flat-workspace-right .flat-calculated-output-panel .flat-basics-head,#stepContent .invoice-head{margin:0!important;padding:12px 14px 10px!important;border-bottom:1px solid #eef2f7!important;background:#fff!important;}
-#stepContent .flat-basics-title,#stepContent .days-distribution-title,#stepContent .mi-simple-section-title,#stepContent .invoice-title{margin:0!important;color:#1A497F!important;font-size:12px!important;line-height:1.2!important;font-weight:900!important;letter-spacing:.08em!important;text-transform:uppercase!important;}
-#stepContent .flat-basics-body,#stepContent .days-distribution-body{padding:12px 14px!important;}
-#stepContent .flat-basics-group{border:0!important;border-radius:0!important;padding:0!important;margin:0!important;background:transparent!important;}
-#stepContent .flat-basics-group-head{display:none!important;}
-#stepContent .flat-basics-grid{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px 12px!important;}
-#stepContent .flat-basics-grid label{margin-bottom:4px!important;font-size:11px!important;line-height:1.2!important;}
-#stepContent .flat-basics-grid input,#stepContent .flat-basics-grid select,#stepContent .flat-input{min-height:34px!important;}
-@media (max-width:900px){#stepContent .flat-basics-grid{grid-template-columns:1fr!important;}}
-#stepContent .mi-simple-table{width:100%!important;border-collapse:collapse!important;table-layout:fixed!important;}
-#stepContent .mi-simple-table th{padding:9px 12px!important;border-bottom:1px solid #eef2f7!important;background:#f8fbff!important;color:#4f6384!important;font-size:10px!important;line-height:1.1!important;font-weight:900!important;letter-spacing:.08em!important;text-transform:uppercase!important;text-align:left!important;}
-#stepContent .mi-simple-table th:nth-child(n+2),#stepContent .mi-simple-table td:nth-child(n+2){text-align:right!important;}
-#stepContent .mi-simple-table td{padding:10px 12px!important;border-bottom:1px solid #eef2f7!important;vertical-align:middle!important;background:#fff!important;}
-#stepContent .mi-simple-table tr:last-child td{border-bottom:0!important;}
-#stepContent .mi-simple-category{color:#0f172a!important;font-size:13px!important;font-weight:800!important;}
-#stepContent .mi-simple-table .flat-input{height:34px!important;min-height:34px!important;padding:7px 10px!important;text-align:right!important;}
-#stepContent .mi-simple-total{color:#0f172a!important;font-size:13px!important;font-weight:900!important;white-space:nowrap!important;font-variant-numeric:tabular-nums!important;}
-#stepContent .mi-simple-section-total td{background:#f8fbff!important;font-weight:900!important;}
-#stepContent .mi-simple-section-total td:first-child{text-align:right!important;color:#0f172a!important;}
-#stepContent .mi-rate-wrap{position:relative!important;display:block!important;width:100%!important;}
-#stepContent .mi-rate-wrap .flat-input{padding-right:30px!important;}
-#stepContent .mi-rate-suffix{position:absolute!important;right:10px!important;top:50%!important;transform:translateY(-50%)!important;pointer-events:none!important;color:#334155!important;font-size:13px!important;font-weight:800!important;}
-#stepContent .invoice-line.final td,#stepContent .invoice-line.final .invoice-name,#stepContent .invoice-line.final .invoice-amount{background:#fff!important;background-image:none!important;}
-#stepContent .flat-workspace-right .days-distribution-card{display:none!important;}
-#stepContent .flat-workspace-left .days-distribution-card{display:block!important;}
-#stepContent .days-distribution-summary{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:8px!important;}
-@media (max-width:700px){#stepContent .days-distribution-summary{grid-template-columns:1fr!important;}}
+
+<style id="mi-equal-row-grid-v7">
+/* Equal-row visual grid: all input and output cards use one 48px row rhythm. */
+#stepContent{
+  --mi-grid-row:48px;
+  --mi-card-head:48px;
+  --mi-grid-line:#eef2f7;
+}
+#stepContent .flat-workspace-shell{
+  align-items:start!important;
+}
+#stepContent .flat-workspace-left{
+  position:relative!important;
+  top:auto!important;
+  max-height:none!important;
+  overflow:visible!important;
+}
+#stepContent .flat-workspace-left,
+#stepContent .flat-workspace-right{
+  align-self:start!important;
+}
+#stepContent .flat-basics-body,
+#stepContent .flat-workspace-left .mi-cost-breakdown,
+#stepContent .flow-results .invoice-breakdown{
+  display:grid!important;
+  gap:12px!important;
+}
+#stepContent .invoice-breakdown{
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  overflow:visible!important;
+}
+#stepContent .invoice-section,
+#stepContent .mi-cost-section,
+#stepContent .flat-basics-group,
+#stepContent .mi-calculated-output-section{
+  border:1px solid var(--line)!important;
+  border-radius:14px!important;
+  background:#fff!important;
+  overflow:hidden!important;
+  margin:0!important;
+}
+#stepContent .invoice-section + .invoice-section{
+  border-top:1px solid var(--line)!important;
+}
+#stepContent .flat-basics-group-head,
+#stepContent .mi-cost-section-head,
+#stepContent .mi-calculated-output-head,
+#stepContent .invoice-section > .invoice-head{
+  min-height:var(--mi-card-head)!important;
+  height:var(--mi-card-head)!important;
+  margin:0!important;
+  padding:0 16px!important;
+  border-bottom:1px solid var(--line)!important;
+  background:#fff!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:flex-start!important;
+}
+#stepContent .invoice-sub{display:none!important;}
+#stepContent .invoice-title,
+#stepContent .flat-basics-group-title,
+#stepContent .mi-cost-section-title,
+#stepContent .mi-calculated-output-title{
+  margin:0!important;
+  color:#1A497F!important;
+  font-size:14px!important;
+  line-height:1!important;
+  font-weight:900!important;
+  letter-spacing:.12em!important;
+  text-transform:uppercase!important;
+}
+#stepContent .flat-basics-grid{
+  display:grid!important;
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  gap:0!important;
+  padding:0!important;
+  background:#fff!important;
+}
+#stepContent .flat-basics-grid > div,
+#stepContent .flat-basics-grid > .mi-empty-input-cell{
+  min-height:var(--mi-grid-row)!important;
+  height:var(--mi-grid-row)!important;
+  padding:4px 10px!important;
+  display:flex!important;
+  flex-direction:column!important;
+  justify-content:center!important;
+  border-bottom:1px solid var(--mi-grid-line)!important;
+  min-width:0!important;
+}
+#stepContent .flat-basics-grid > div:nth-child(odd){border-right:1px solid var(--mi-grid-line)!important;}
+#stepContent .flat-basics-grid > div:nth-last-child(-n+2){border-bottom:0!important;}
+#stepContent .flat-basics-grid label{
+  font-size:9px!important;
+  line-height:1.1!important;
+  margin:0 0 3px 0!important;
+  font-weight:800!important;
+}
+#stepContent .flat-basics-grid input,
+#stepContent .flat-basics-grid select{
+  height:30px!important;
+  min-height:30px!important;
+  padding:3px 10px!important;
+  border-radius:9px!important;
+  font-size:12px!important;
+}
+#stepContent .mi-cost-column-head,
+#stepContent .mi-cost-row,
+#stepContent .mi-cost-section-total,
+#stepContent .mi-calculated-output-table tr,
+#stepContent .invoice-table tr,
+#stepContent .mi-grid-blank-row{
+  min-height:var(--mi-grid-row)!important;
+  height:var(--mi-grid-row)!important;
+}
+#stepContent .mi-cost-column-head,
+#stepContent .mi-cost-row,
+#stepContent .mi-cost-section-total{
+  padding-top:0!important;
+  padding-bottom:0!important;
+  align-items:center!important;
+}
+#stepContent .mi-cost-row{border-bottom:1px solid var(--mi-grid-line)!important;}
+#stepContent .mi-cost-section-total{border-top:0!important;border-bottom:0!important;background:#f8fbff!important;}
+#stepContent .mi-cost-field input,
+#stepContent .mi-rate-wrap input{
+  height:34px!important;
+  min-height:34px!important;
+  padding-top:4px!important;
+  padding-bottom:4px!important;
+}
+#stepContent .mi-rate-wrap{
+  position:relative!important;
+  display:flex!important;
+  align-items:center!important;
+}
+#stepContent .mi-rate-wrap input{
+  padding-right:26px!important;
+  text-align:right!important;
+}
+#stepContent .mi-rate-suffix{
+  position:absolute!important;
+  right:10px!important;
+  top:50%!important;
+  transform:translateY(-50%)!important;
+  pointer-events:none!important;
+  color:#334155!important;
+  font-weight:800!important;
+}
+#stepContent .mi-calculated-output-table td,
+#stepContent .invoice-line td{
+  height:var(--mi-grid-row)!important;
+  min-height:var(--mi-grid-row)!important;
+  padding-top:0!important;
+  padding-bottom:0!important;
+  vertical-align:middle!important;
+  border-bottom:1px solid var(--mi-grid-line)!important;
+}
+#stepContent .invoice-line:last-child td,
+#stepContent .mi-calculated-output-table tr:last-child td{border-bottom:0!important;}
+#stepContent .invoice-line.total td,
+#stepContent .invoice-line.final td{
+  background:#fff!important;
+  border-top:0!important;
+}
+#stepContent .invoice-label{
+  display:flex!important;
+  min-height:var(--mi-grid-row)!important;
+  align-items:center!important;
+  justify-content:center!important;
+}
+#stepContent .invoice-name{
+  background:#fff!important;
+}
+#stepContent .invoice-amount{
+  background:transparent!important;
+  box-shadow:none!important;
+}
+#stepContent .mi-grid-blank-row td,
+#stepContent .mi-grid-blank-row .invoice-name,
+#stepContent .mi-grid-blank-row .invoice-amount,
+#stepContent .mi-cost-empty-row{
+  color:transparent!important;
+}
+#stepContent .mi-grid-blank-row{counter-increment:none!important;}
+#stepContent .mi-grid-blank-row .invoice-label::before{display:none!important;content:""!important;}
+#stepContent .mi-cost-empty-row{
+  display:grid!important;
+  grid-template-columns:minmax(170px,1.25fr) minmax(92px,.55fr) minmax(104px,.6fr) minmax(120px,.8fr)!important;
+  gap:12px!important;
+  min-height:var(--mi-grid-row)!important;
+  height:var(--mi-grid-row)!important;
+  border-bottom:1px solid var(--mi-grid-line)!important;
+  background:#fff!important;
+}
+@media (max-width:700px){
+  #stepContent .flat-basics-grid{grid-template-columns:1fr!important;}
+  #stepContent .flat-basics-grid > div:nth-child(odd){border-right:0!important;}
+  #stepContent .flat-basics-grid > div:nth-last-child(-n+2){border-bottom:1px solid var(--mi-grid-line)!important;}
+  #stepContent .flat-basics-grid > div:last-child{border-bottom:0!important;}
+}
 </style>
-<script id="mi-final-input-output-alignment-v7-script">
+<script id="mi-equal-row-grid-v7-script">
 (function(){
-  function h(value){return String(value==null?'':value).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
-  function plain(value){try{if(typeof formatPlainNumber==='function')return formatPlainNumber(value);}catch(_){}return value==null?'':String(value);}
-  function moneySafe(value){try{if(typeof money==='function')return money(value||0);}catch(_){}var n=Number(value||0);if(!Number.isFinite(n))n=0;return '€ '+n.toLocaleString('de-DE',{minimumFractionDigits:2,maximumFractionDigits:2});}
-  function input(idx,fieldName,value,placeholder){return '<input type="text" inputmode="decimal" class="flat-input formatted-number-input" data-idx="'+h(idx)+'" data-field="'+h(fieldName)+'" value="'+h(plain(value))+'" placeholder="'+h(placeholder||'0')+'">';}
-  function rateInput(idx,fieldName,value){return '<div class="mi-rate-wrap"><input type="text" inputmode="decimal" class="flat-input formatted-number-input" data-idx="'+h(idx)+'" data-field="'+h(fieldName)+'" value="'+h(plain(value))+'" placeholder="0"><span class="mi-rate-suffix">%</span></div>';}
-  function basicGroup(title,body,extraClass){return '<section class="flat-basics-group '+(extraClass||'')+'"><div class="flat-basics-group-head"><h5 class="flat-basics-group-title">'+h(title)+'</h5></div><div class="flat-basics-grid">'+body+'</div></section>';}
-  function cleanDash(value){return value==null||value===''?'—':value;}
-  function countryField(value,attrs,inputAttrs,extraClass){if(typeof flatCountryInputHtml==='function')return flatCountryInputHtml(value,attrs,inputAttrs,extraClass||'');return '<input '+attrs+' value="'+h(value||'')+'" class="flat-input '+h(extraClass||'')+'" '+(inputAttrs||'')+'>';}
-  function calculatedDetailsBlock(p,idx){
-    var contractingEntityField='<div class="ce-overwrite-wrap '+(hasContractingEntityOverwrite(p)?'is-overwritten':'')+'"><div class="ce-overwrite-top"><div class="ce-input-with-gear"><input id="computed-contracting-entity-'+h(idx)+'" value="'+h(getEffectiveContractingEntity(p))+'" class="flat-input ce-overwrite-input auto-derived-select" placeholder="" readonly><button type="button" class="ce-gear-btn" onclick="handleContractingEntityGearClick('+h(idx)+')" title="Overwrite" aria-label="Overwrite">⚙</button></div></div>'+(hasContractingEntityOverwrite(p)?'<div class="ce-overwrite-meta"><span class="ce-overwrite-badge">Overwritten</span><div class="ce-overwrite-note">Auto: <strong>'+h(cleanDash(getAutoContractingEntity(p)))+'</strong> → Current: <strong>'+h(cleanDash(getEffectiveContractingEntity(p)))+'</strong></div><div class="ce-overwrite-note">Reason: '+h(cleanDash(p.contractingEntityOverwriteReasonCode))+'</div><div class="ce-overwrite-actions"><button type="button" class="small secondary" onclick="resetContractingEntityOverwrite('+h(idx)+')">Reset to automatic</button></div></div>':'')+'</div>';
-    var calculated=field('ITR country',countryField(getImplementationCountryForPosition(),'id="computed-ITR-country-'+h(idx)+'"','placeholder="" readonly','auto-derived-select'))+field('Tax status','<input id="computed-tax-status-'+h(idx)+'" value="'+h(derivedCalculationValue(deriveTaxStatus(p)))+'" class="flat-input auto-derived-select'+derivedCalculationClass(deriveTaxStatus(p))+'" placeholder="Pending calculation" readonly>')+field('Contracting entity',contractingEntityField)+field('VAT jurisdiction','<input id="computed-vat-jurisdiction-'+h(idx)+'" value="'+h(derivedCalculationValue(displayVatJurisdiction(deriveVatJurisdiction(p))))+'" class="flat-input auto-derived-select'+derivedCalculationClass(deriveVatJurisdiction(p))+'" placeholder="Pending calculation" readonly>');
-    return '<div class="details-panel flat-basics-panel flat-calculated-output-panel"><div class="flat-basics-head"><h4 class="flat-basics-title">Calculated details</h4></div><div class="flat-basics-body">'+basicGroup('Calculated details',calculated,'flat-basics-calculated')+'</div></div>';
+  function addBlankInputCells(){
+    document.querySelectorAll('#stepContent .flat-basics-grid').forEach(function(grid){
+      if (grid.dataset.miEqualRowsDone === '1') return;
+      var cells = Array.prototype.slice.call(grid.children).filter(function(el){ return !el.classList.contains('mi-empty-input-cell'); });
+      var columns = window.innerWidth <= 700 ? 1 : 2;
+      var remainder = cells.length % columns;
+      var needed = remainder ? (columns - remainder) : 0;
+      // Basics has six fields; add one full visual row so it matches the four calculated-detail rows on the right.
+      if (columns === 2 && cells.length === 6) needed += 2;
+      for (var i=0; i<needed; i++){
+        var blank = document.createElement('div');
+        blank.className = 'mi-empty-input-cell';
+        blank.setAttribute('aria-hidden','true');
+        grid.appendChild(blank);
+      }
+      grid.dataset.miEqualRowsDone = '1';
+    });
   }
-  window.renderPositionDetails=function(p,idx){
-    var basics=field('Position title','<input data-idx="'+h(idx)+'" data-field="title" value="'+h(p.title)+'" class="flat-input" placeholder="Write position title">')+field('Name','<input data-idx="'+h(idx)+'" data-field="name" value="'+h(p.name||'')+'" class="flat-input" placeholder="Write name">')+field('Country of residence',countryField(p.countryOfResidence,'data-idx="'+h(idx)+'" data-field="countryOfResidence"','placeholder="Select or type a country"',''))+field('Contract classification','<select data-idx="'+h(idx)+'" data-field="classification" class="flat-input"><option value="" '+(!p.classification?'selected':'')+'>Select contract classification</option>'+POSITION_CLASSIFICATIONS.map(function(v){return '<option value="'+h(v)+'" '+(v===p.classification?'selected':'')+'>'+h(v)+'</option>';}).join('')+'</select>')+field('Provider type','<select data-idx="'+h(idx)+'" data-field="contractualType" class="flat-input"><option value="" '+(!p.contractualType?'selected':'')+'>Select provider type</option>'+CONTRACTUAL_TYPES.map(function(v){return '<option value="'+h(v)+'" '+(v===p.contractualType?'selected':'')+'>'+h(v)+'</option>';}).join('')+'</select>')+field('Input mode','<div><select data-idx="'+h(idx)+'" data-field="inputMode" class="flat-input">'+INPUT_MODES.map(function(v){return '<option '+(v===p.inputMode?'selected':'')+'>'+h(v)+'</option>';}).join('')+'</select>'+((p.inputMode&&String(p.inputMode).toLowerCase()!=='gross')?'<div class="inline-warning">It is recommendable to always negotiate gross. Continue only if you are sure.</div>':'')+'</div>');
-    return '<div class="details-panel flat-basics-panel"><div class="flat-basics-head"><h4 class="flat-basics-title">Basics</h4></div><div class="flat-basics-body">'+basicGroup('Basics',basics,'flat-basics-entered')+'</div></div>';
-  };
-  function sectionHtml(section,p,idx){
-    var hasPercent=section.rows.some(function(r){return r.special==='percent';});
-    var rows=section.rows.map(function(row){if(row.special==='percent'){return '<tr><td><div class="mi-simple-category">'+h(row.label)+'</div></td><td></td><td>'+rateInput(idx,row.rateField,p[row.rateField])+'</td><td><div class="mi-simple-total" id="component-total-'+h(idx)+'-'+h(row.key)+'">'+h(plain(row.total))+'%</div></td></tr>';}return '<tr><td><div class="mi-simple-category">'+h(row.label)+'</div></td><td>'+input(idx,row.qtyField,p[row.qtyField],'0')+'</td><td>'+input(idx,row.rateField,p[row.rateField],'0')+'</td><td><div class="mi-simple-total" id="component-total-'+h(idx)+'-'+h(row.key)+'">'+moneySafe(row.total)+'</div></td></tr>';}).join('');
-    var total=section.totalValue==null?'':'<tr class="mi-simple-section-total"><td colspan="3">Section total</td><td><div class="mi-simple-total">'+moneySafe(section.totalValue)+'</div></td></tr>';
-    return '<section class="mi-simple-section component-section"><div class="mi-simple-section-head"><h4 class="mi-simple-section-title">'+h(section.title)+'</h4></div><table class="mi-simple-table"><colgroup><col style="width:44%"><col style="width:18%"><col style="width:20%"><col style="width:18%"></colgroup><thead><tr><th>Category</th><th>'+(hasPercent?'':'Quantity')+'</th><th>Rate</th><th>Total</th></tr></thead><tbody>'+rows+total+'</tbody></table></section>';
+  function blankInvoiceRow(){
+    var tr = document.createElement('tr');
+    tr.className = 'invoice-line mi-grid-blank-row';
+    tr.setAttribute('aria-hidden','true');
+    tr.innerHTML = '<td><div class="invoice-label"><div class="invoice-name">&nbsp;</div></div></td><td class="invoice-amount-cell"><div class="invoice-amount">&nbsp;</div></td>';
+    return tr;
   }
-  window.renderSmartComponentRows=function(p,c,idx){
-    var sections=[{title:'Provider remuneration',totalValue:c.remunerationTotal||0,rows:[{key:'fee',label:'Base fee',rateField:'feeRate',qtyField:'feeQty',total:c.fee},{key:'perDiem',label:'Per diems',rateField:'perDiemRate',qtyField:'perDiemQty',total:c.perDiem},{key:'other',label:'Other remuneration',rateField:'otherRate',qtyField:'otherQty',total:c.other}]},{title:'Non-remuneration costs',totalValue:c.nonRemunerationTotal||0,rows:[{key:'housing',label:'Accommodation',rateField:'housingRate',qtyField:'housingQty',total:c.housing},{key:'insurance',label:'Insurance',rateField:'insuranceRate',qtyField:'insuranceQty',total:c.insurance},{key:'transport',label:'Travel costs',rateField:'transportRate',qtyField:'transportQty',total:c.transport},{key:'otherCost',label:'Other costs',rateField:'otherCostRate',qtyField:'otherCostQty',total:c.otherCost}]},{title:'Margin',totalValue:null,rows:[{key:'marginRate',label:'Margin rate',rateField:'marginRate',total:(c.marginRateDecimal||0)*100,special:'percent'}]}];
-    return '<div class="component-breakdown flat-input-breakdown mi-simple-breakdown">'+sections.map(function(section){return sectionHtml(section,p,idx);}).join('')+'</div>';
-  };
-  function stripDistributionFromOutput(html){html=String(html==null?'':html);var marker='<section class="days-distribution-card"';var pos=html.indexOf(marker);return pos>=0?html.slice(0,pos):html;}
-  window.renderFlatPosition=function(p,idx){
-    var c=computePosition(p);var displayTitle=positionDisplayTitle(p,idx);if(!!p._collapsed)return '<div class="position is-collapsed">'+renderPositionSummary(p,idx)+'</div>';
-    var output=stripDistributionFromOutput(renderFlatMetrics(c,idx));
-    var distribution=(typeof window.renderDaysDistribution==='function')?window.renderDaysDistribution(p,idx):'';
-    return '<div class="position flat-workspace-position"><div class="top-actions flat-workspace-header"><div><h4>'+h(displayTitle)+'</h4></div><div class="position-tools"><button class="small primary" onclick="saveFlat('+h(idx)+')">'+(p._saved?'Save position':'Save changes')+'</button><button class="secondary small" onclick="event.stopPropagation(); removeFlat('+h(idx)+')">Remove</button></div></div><div class="position-open-shell flat-workspace-shell"><aside class="flat-workspace-left" aria-label="Inputs"><div class="flat-workspace-panel-title">Inputs</div>'+renderPositionDetails(p,idx)+renderSmartComponentRows(p,c,idx)+distribution+'</aside><section class="flat-workspace-right" aria-label="Calculation output">'+output+'</section></div></div>';
-  };
-  try{renderPositionDetails=window.renderPositionDetails;}catch(_){}try{renderSmartComponentRows=window.renderSmartComponentRows;}catch(_){}try{renderFlatPosition=window.renderFlatPosition;}catch(_){}
+  function ensureBlankRows(tbody, targetRows){
+    if (!tbody) return;
+    Array.prototype.slice.call(tbody.querySelectorAll('tr.mi-grid-blank-row')).forEach(function(r){ r.remove(); });
+    var realRows = tbody.querySelectorAll('tr:not(.mi-grid-blank-row)').length;
+    for (var i=realRows; i<targetRows; i++) tbody.appendChild(blankInvoiceRow());
+  }
+  function equalizeOutputCards(){
+    document.querySelectorAll('#stepContent .flow-results .invoice-section').forEach(function(section, index){
+      var tbody = section.querySelector('tbody');
+      if (!tbody) return;
+      if (index === 0) ensureBlankRows(tbody, 5);       // Matches left Provider remuneration: column header + 3 rows + total.
+      else if (index === 1) ensureBlankRows(tbody, 6);  // Matches left Non-remuneration costs: column header + 4 rows + total.
+      else if (index === 2) ensureBlankRows(tbody, 4);  // Keeps Deductions on the same row rhythm.
+      else if (index === 3) ensureBlankRows(tbody, 4);  // Keeps Cash flows and margin on the same row rhythm.
+    });
+  }
+  function equalizeLeftCards(){
+    document.querySelectorAll('#stepContent .mi-cost-section').forEach(function(section){
+      Array.prototype.slice.call(section.querySelectorAll('.mi-cost-empty-row')).forEach(function(r){ r.remove(); });
+      var title = (section.querySelector('.mi-cost-section-title') || {}).textContent || '';
+      if (/^Margin$/i.test(title.trim())){
+        var rowsBox = section.querySelector('.mi-cost-rows');
+        if (rowsBox){
+          var current = rowsBox.querySelectorAll('.mi-cost-row').length;
+          for (var i=current; i<3; i++){
+            var blank = document.createElement('div');
+            blank.className = 'mi-cost-empty-row';
+            blank.setAttribute('aria-hidden','true');
+            blank.innerHTML = '<div></div><div></div><div></div><div></div>';
+            rowsBox.appendChild(blank);
+          }
+        }
+      }
+    });
+  }
+  function applyEqualRows(){
+    addBlankInputCells();
+    equalizeOutputCards();
+    equalizeLeftCards();
+  }
+  var oldRenderFlat = window.renderFlatPosition || (typeof renderFlatPosition === 'function' ? renderFlatPosition : null);
+  if (oldRenderFlat && !oldRenderFlat.__miEqualRowsWrapped){
+    var wrapped = function(){
+      var result = oldRenderFlat.apply(this, arguments);
+      setTimeout(applyEqualRows, 0);
+      return result;
+    };
+    wrapped.__miEqualRowsWrapped = true;
+    window.renderFlatPosition = wrapped;
+    try { renderFlatPosition = wrapped; } catch(_) {}
+  }
+  document.addEventListener('input', function(){ setTimeout(applyEqualRows, 0); }, true);
+  document.addEventListener('change', function(){ setTimeout(applyEqualRows, 0); }, true);
+  window.addEventListener('resize', function(){
+    document.querySelectorAll('#stepContent .flat-basics-grid').forEach(function(grid){
+      grid.dataset.miEqualRowsDone = '0';
+      Array.prototype.slice.call(grid.querySelectorAll('.mi-empty-input-cell')).forEach(function(cell){ cell.remove(); });
+    });
+    setTimeout(applyEqualRows, 0);
+  });
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', applyEqualRows); else applyEqualRows();
 })();
 </script>
 
