@@ -10305,6 +10305,183 @@ body:not(.is-intro) .flat-summary-totals > div{
 })();
 </script>
 
+
+
+<style id="mi-requested-input-output-cleanup-v4">
+/* Requested cleanup: Inputs should visually match Output and should not have its own scrolling frame. */
+#stepContent .flat-workspace-left{
+  position:relative!important;
+  top:auto!important;
+  max-height:none!important;
+  overflow:visible!important;
+  padding:0!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+#stepContent .flat-workspace-panel-title{
+  margin:0 0 12px 0!important;
+  padding:0!important;
+  border:0!important;
+  background:transparent!important;
+  font-size:22px!important;
+  line-height:1.2!important;
+  font-weight:900!important;
+  color:#0f172a!important;
+  letter-spacing:0!important;
+  text-transform:none!important;
+}
+#stepContent .flat-basics-panel{
+  margin-top:0!important;
+  padding:0!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+}
+#stepContent .flat-basics-head{display:none!important;}
+#stepContent .flat-basics-body{display:grid!important;gap:14px!important;padding:0!important;background:transparent!important;}
+#stepContent .flat-basics-group,
+#stepContent .mi-cost-section,
+#stepContent .mi-calculated-output-section{
+  border:1px solid var(--line)!important;
+  border-radius:18px!important;
+  background:#fff!important;
+  overflow:hidden!important;
+}
+#stepContent .flat-basics-group-head,
+#stepContent .mi-cost-section-head,
+#stepContent .mi-calculated-output-head{
+  padding:16px 18px 12px!important;
+  border-bottom:1px solid var(--line)!important;
+  background:#fff!important;
+}
+#stepContent .flat-basics-group-title,
+#stepContent .mi-cost-section-title,
+#stepContent .mi-calculated-output-title{
+  margin:0!important;
+  color:#1A497F!important;
+  font-size:12px!important;
+  line-height:1.2!important;
+  font-weight:900!important;
+  letter-spacing:.08em!important;
+  text-transform:uppercase!important;
+}
+#stepContent .flat-basics-grid{padding:14px 18px 18px!important;}
+#stepContent .mini-note{display:none!important;}
+#stepContent .flat-workspace-left .mi-cost-breakdown{margin-top:14px!important;gap:14px!important;}
+#stepContent .mi-cost-column-head,
+#stepContent .mi-cost-row,
+#stepContent .mi-cost-section-total{
+  display:grid!important;
+  grid-template-columns:minmax(170px,1.25fr) minmax(92px,.55fr) minmax(104px,.6fr) minmax(120px,.8fr)!important;
+  gap:12px!important;
+  align-items:center!important;
+  padding:11px 18px!important;
+}
+#stepContent .mi-cost-column-head{
+  background:#f8fbff!important;
+  border-bottom:1px solid #e6edf7!important;
+  color:#4f6384!important;
+  font-size:11px!important;
+  line-height:1.2!important;
+  font-weight:900!important;
+  letter-spacing:.07em!important;
+  text-transform:uppercase!important;
+}
+#stepContent .mi-cost-column-head div:not(:first-child){text-align:right!important;}
+#stepContent .mi-cost-row{border-bottom:1px solid #eef2f7!important;background:#fff!important;}
+#stepContent .mi-cost-row:last-child{border-bottom:0!important;}
+#stepContent .mi-cost-label-cell{padding:0!important;}
+#stepContent .mi-cost-index{display:none!important;}
+#stepContent .mi-cost-name{font-size:14px!important;line-height:1.25!important;font-weight:600!important;color:#1f2937!important;}
+#stepContent .mi-cost-field label,
+#stepContent .mi-cost-total-label{display:none!important;}
+#stepContent .mi-cost-field input{height:40px!important;font-size:14px!important;border-radius:12px!important;}
+#stepContent .mi-cost-total-cell{display:block!important;align-self:center!important;text-align:right!important;}
+#stepContent .mi-cost-total{font-size:15px!important;font-weight:800!important;color:#0f172a!important;text-align:right!important;}
+#stepContent .mi-cost-section-total{background:#f8fbff!important;border-top:1px solid #dbe4f0!important;}
+#stepContent .mi-cost-section-total-name{grid-column:1/4!important;text-align:right!important;font-size:14px!important;font-weight:800!important;color:#1f2937!important;}
+#stepContent .mi-cost-section-total-value{text-align:right!important;font-size:15px!important;font-weight:900!important;color:#0f172a!important;}
+#stepContent .mi-cost-percent-row{grid-template-columns:minmax(170px,1.25fr) minmax(104px,.6fr) minmax(120px,.8fr)!important;}
+#stepContent .mi-cost-percent-row .mi-cost-field{grid-column:auto!important;}
+#stepContent .mi-calculated-output-section{margin:0 0 14px 0!important;}
+#stepContent .mi-calculated-output-table{width:100%!important;border-collapse:collapse!important;table-layout:fixed!important;}
+#stepContent .mi-calculated-output-table td{padding:11px 14px!important;border-bottom:1px solid #eef2f7!important;vertical-align:middle!important;}
+#stepContent .mi-calculated-output-table tr:last-child td{border-bottom:0!important;}
+#stepContent .mi-calculated-label{font-size:14px!important;font-weight:600!important;color:#1f2937!important;}
+#stepContent .mi-calculated-value{font-size:15px!important;font-weight:800!important;color:#0f172a!important;text-align:right!important;}
+@media (max-width:1280px){
+  #stepContent .mi-cost-column-head,
+  #stepContent .mi-cost-row,
+  #stepContent .mi-cost-section-total{grid-template-columns:minmax(0,1fr) minmax(82px,.55fr) minmax(94px,.6fr) minmax(108px,.75fr)!important;padding-left:14px!important;padding-right:14px!important;gap:8px!important;}
+}
+@media (max-width:700px){
+  #stepContent .mi-cost-column-head{display:none!important;}
+  #stepContent .mi-cost-row{grid-template-columns:1fr 1fr!important;gap:10px!important;}
+  #stepContent .mi-cost-label-cell{grid-column:1/-1!important;}
+  #stepContent .mi-cost-field label{display:block!important;margin:0 0 6px 0!important;font-size:12px!important;font-weight:800!important;color:#64748b!important;}
+  #stepContent .mi-cost-total-cell{grid-column:1/-1!important;display:flex!important;justify-content:space-between!important;text-align:left!important;}
+  #stepContent .mi-cost-total-label{display:block!important;font-size:12px!important;font-weight:800!important;color:#64748b!important;}
+  #stepContent .mi-cost-section-total{grid-template-columns:1fr!important;}
+  #stepContent .mi-cost-section-total-name{grid-column:auto!important;text-align:left!important;}
+  #stepContent .mi-cost-section-total-value{text-align:left!important;}
+}
+</style>
+<script id="mi-requested-input-output-cleanup-v4-script">
+(function(){
+  function escHtml(value){ return String(value == null ? '' : value).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+  function plain(value){ try { if (typeof formatPlainNumber === 'function') return formatPlainNumber(value); } catch(_) {} return (value == null || value === '') ? '' : String(value); }
+  function moneySafe(value){ try { if (typeof money === 'function') return money(value || 0); } catch(_) {} var n = Number(value || 0); if (!Number.isFinite(n)) n = 0; return '€ ' + n.toLocaleString('de-DE', {minimumFractionDigits:2, maximumFractionDigits:2}); }
+  function inputOnly(p, idx, field, label, placeholder){ return '<div class="mi-cost-field"><label>' + label + '</label><input type="text" inputmode="decimal" class="flat-input formatted-number-input" data-idx="' + idx + '" data-field="' + field + '" value="' + escHtml(plain(p[field])) + '" placeholder="' + placeholder + '" aria-label="' + label + '"></div>'; }
+  function totalOnly(idx, key, amount, isPercent){ return '<div class="mi-cost-total-cell"><div class="mi-cost-total-label">Total</div><div class="mi-cost-total" id="component-total-' + idx + '-' + key + '">' + (isPercent ? escHtml(plain(amount)) + '%' : moneySafe(amount)) + '</div></div>'; }
+  function normalRow(row, p, idx){ return '<div class="mi-cost-row"><div class="mi-cost-label-cell"><span class="mi-cost-index">•</span><div class="mi-cost-name">' + escHtml(row.label) + '</div></div>' + inputOnly(p, idx, row.qtyField, 'Quantity', '0') + inputOnly(p, idx, row.rateField, 'Rate', '0.00') + totalOnly(idx, row.key, row.total, false) + '</div>'; }
+  function percentRow(row, p, idx){ return '<div class="mi-cost-row mi-cost-percent-row"><div class="mi-cost-label-cell"><span class="mi-cost-index">•</span><div class="mi-cost-name">' + escHtml(row.label) + '</div></div><div class="mi-cost-field"><label>Rate</label><div class="mi-rate-wrap"><input type="text" inputmode="decimal" class="flat-input formatted-number-input" data-idx="' + idx + '" data-field="' + row.rateField + '" value="' + escHtml(plain(p[row.rateField])) + '" placeholder="0" aria-label="Rate"><span class="mi-rate-suffix">%</span></div></div>' + totalOnly(idx, row.key, row.total, true) + '</div>'; }
+  function sectionHtml(section, p, idx){
+    var rows = section.rows.map(function(row){ return row.special === 'percent' ? percentRow(row, p, idx) : normalRow(row, p, idx); }).join('');
+    var header = section.rows.some(function(r){ return r.special === 'percent'; }) ? '<div class="mi-cost-column-head"><div>Category</div><div>Rate</div><div>Total</div></div>' : '<div class="mi-cost-column-head"><div>Category</div><div>Quantity</div><div>Rate</div><div>Total</div></div>';
+    var total = section.totalValue == null ? '' : '<div class="mi-cost-section-total"><div class="mi-cost-section-total-name">Section total</div><div class="mi-cost-section-total-value">' + moneySafe(section.totalValue) + '</div></div>';
+    return '<section class="mi-cost-section"><div class="mi-cost-section-head"><h4 class="mi-cost-section-title">' + escHtml(section.title) + '</h4></div>' + header + '<div class="mi-cost-rows">' + rows + '</div>' + total + '</section>';
+  }
+  window.renderSmartComponentRows = function(p, c, idx){
+    var sections = [
+      { title:'Provider remuneration', totalValue:c.remunerationTotal || 0, rows:[{ key:'fee', label:'Base fee', rateField:'feeRate', qtyField:'feeQty', total:c.fee },{ key:'perDiem', label:'Per diems', rateField:'perDiemRate', qtyField:'perDiemQty', total:c.perDiem },{ key:'other', label:'Other remuneration', rateField:'otherRate', qtyField:'otherQty', total:c.other }]},
+      { title:'Non-remuneration costs', totalValue:c.nonRemunerationTotal || 0, rows:[{ key:'housing', label:'Accommodation', rateField:'housingRate', qtyField:'housingQty', total:c.housing },{ key:'insurance', label:'Insurance', rateField:'insuranceRate', qtyField:'insuranceQty', total:c.insurance },{ key:'transport', label:'Travel costs', rateField:'transportRate', qtyField:'transportQty', total:c.transport },{ key:'otherCost', label:'Other costs', rateField:'otherCostRate', qtyField:'otherCostQty', total:c.otherCost }]},
+      { title:'Margin', totalValue:null, rows:[{ key:'marginRate', label:'Margin rate', rateField:'marginRate', total:(c.marginRateDecimal || 0) * 100, special:'percent' }]}
+    ];
+    return '<div class="component-breakdown flat-input-breakdown mi-cost-breakdown">' + sections.map(function(section){ return sectionHtml(section, p, idx); }).join('') + '</div>';
+  };
+  try { renderSmartComponentRows = window.renderSmartComponentRows; } catch(_) {}
+  function calculatedRows(p){
+    var rows = [];
+    function add(label, value){ rows.push('<tr><td class="mi-calculated-label">' + escHtml(label) + '</td><td class="mi-calculated-value">' + escHtml(value || '—') + '</td></tr>'); }
+    try { add('ITR country', getImplementationCountryForPosition()); } catch(_) { add('ITR country', '—'); }
+    try { add('Tax status', derivedCalculationValue(deriveTaxStatus(p))); } catch(_) { add('Tax status', '—'); }
+    try { add('Contracting entity', getEffectiveContractingEntity(p)); } catch(_) { add('Contracting entity', '—'); }
+    try { add('VAT jurisdiction', derivedCalculationValue(displayVatJurisdiction(deriveVatJurisdiction(p)))); } catch(_) { add('VAT jurisdiction', '—'); }
+    return rows.join('');
+  }
+  function calculatedPanel(p){ return '<section class="mi-calculated-output-section"><div class="mi-calculated-output-head"><h4 class="mi-calculated-output-title">Calculated details</h4></div><table class="mi-calculated-output-table"><tbody>' + calculatedRows(p || {}) + '</tbody></table></section>'; }
+  window.renderPositionDetails = function(p, idx){
+    var entered = '';
+    entered += field('Position title', '<input data-idx="' + idx + '" data-field="title" value="' + esc(p.title) + '" class="flat-input" placeholder="Write position title">');
+    entered += field('Name', '<input data-idx="' + idx + '" data-field="name" value="' + esc(p.name || '') + '" class="flat-input" placeholder="Write name">');
+    entered += field('Country of residence', '<input data-idx="' + idx + '" data-field="countryOfResidence" value="' + esc(p.countryOfResidence || '') + '" class="flat-input" placeholder="Select or type a country" list="countryOptions">');
+    entered += field('Contract classification', '<select data-idx="' + idx + '" data-field="classification" class="flat-input"><option value="" ' + (!p.classification ? 'selected' : '') + '>Select contract classification</option>' + POSITION_CLASSIFICATIONS.map(function(v){ return '<option value="' + esc(v) + '" ' + (v === p.classification ? 'selected' : '') + '>' + esc(v) + '</option>'; }).join('') + '</select>');
+    entered += field('Provider type', '<select data-idx="' + idx + '" data-field="contractualType" class="flat-input"><option value="" ' + (!p.contractualType ? 'selected' : '') + '>Select provider type</option>' + CONTRACTUAL_TYPES.map(function(v){ return '<option value="' + esc(v) + '" ' + (v === p.contractualType ? 'selected' : '') + '>' + esc(v) + '</option>'; }).join('') + '</select>');
+    entered += field('Input mode', '<div><select data-idx="' + idx + '" data-field="inputMode" class="flat-input">' + INPUT_MODES.map(function(v){ return '<option ' + (v === p.inputMode ? 'selected' : '') + '>' + esc(v) + '</option>'; }).join('') + '</select>' + ((p.inputMode && String(p.inputMode).toLowerCase() !== 'gross') ? '<div class="inline-warning">It is recommendable to always negotiate gross. Continue only if you are sure.</div>' : '') + '</div>');
+    return '<div class="details-panel flat-basics-panel"><div class="flat-basics-body"><section class="flat-basics-group flat-basics-entered"><div class="flat-basics-group-head"><h5 class="flat-basics-group-title">Basics</h5></div><div class="flat-basics-grid">' + entered + '</div></section></div></div>';
+  };
+  try { renderPositionDetails = window.renderPositionDetails; } catch(_) {}
+  var oldMetrics = window.renderFlatMetrics || (typeof renderFlatMetrics === 'function' ? renderFlatMetrics : null);
+  if (oldMetrics) { window.renderFlatMetrics = function(c, idx){ var html = oldMetrics.apply(this, arguments); var p = null; try { p = flatRates && flatRates[idx]; } catch(_) {} var panel = calculatedPanel(p || {}); if (String(html).indexOf('mi-calculated-output-section') >= 0) return html; return String(html).replace('<div class="flow-results"><h3>Output</h3>', '<div class="flow-results"><h3>Output</h3>' + panel); }; try { renderFlatMetrics = window.renderFlatMetrics; } catch(_) {} }
+  var oldPosition = window.renderFlatPosition || (typeof renderFlatPosition === 'function' ? renderFlatPosition : null);
+  if (oldPosition) { window.renderFlatPosition = function(p, idx){ var html = oldPosition.apply(this, arguments); return String(html).replace(/Inputs\s*&amp;\s*assumptions/g, 'Inputs').replace(/aria-label="Inputs and assumptions"/g, 'aria-label="Inputs"'); }; try { renderFlatPosition = window.renderFlatPosition; } catch(_) {} }
+  function removeInnerScroll(){ document.querySelectorAll('#stepContent .flat-workspace-left').forEach(function(el){ el.style.setProperty('max-height','none','important'); el.style.setProperty('overflow','visible','important'); el.style.setProperty('position','relative','important'); el.style.setProperty('top','auto','important'); }); }
+  window.addEventListener('resize', removeInnerScroll); if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', removeInnerScroll); else removeInnerScroll();
+})();
+</script>
+
 </body></html>
 
 
