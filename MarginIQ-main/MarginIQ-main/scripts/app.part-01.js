@@ -1038,7 +1038,7 @@ function buildContractHtml(p, idx){
 
 
 <style id="final-inputs-assumptions-width-and-output-alignment-patch">
-/* Final override: Inputs increased by another 20% and clearer per-row inputs. */
+/* Final override: Inputs & assumptions increased by another 20% and clearer per-row inputs. */
 @media (min-width:1101px){
   .flat-workspace-shell{
     grid-template-columns:minmax(460px,548px) minmax(0,1fr)!important;
@@ -1107,9 +1107,6 @@ function buildContractHtml(p, idx){
     return '<div class="details-panel flat-basics-panel flat-calculated-output-panel"><div class="flat-basics-head"><h4 class="flat-basics-title">Calculated details</h4></div><div class="flat-basics-body">' + flatBasicsGroup('Calculated details', calculatedDetails, 'flat-basics-calculated') + '</div></div>';
   }
 
-  // Expose this helper so the active Output renderer can insert it directly.
-  window.calculatedDetailsBlock = calculatedDetailsBlock;
-
   window.renderPositionDetails = renderPositionDetails = function(p, idx){
     var enteredDetails = '' +
       field('Position title', '<input data-idx="' + idx + '" data-field="title" value="' + esc(p.title) + '" class="flat-input" placeholder="Write position title">') +
@@ -1141,7 +1138,7 @@ function buildContractHtml(p, idx){
     ];
 
     function inputWithLabel(label, html){
-      return '<div class="component-input-cell">' + html + '</div>';
+      return '<div><span class="component-field-label">' + label + '</span>' + html + '</div>';
     }
     function renderLine(row){
       if (row.special === 'percent'){
@@ -1160,7 +1157,16 @@ function buildContractHtml(p, idx){
     }).join('') + '</div>';
   };
 
-  // The Calculated details block is inserted directly in the active renderFlatMetrics function below.
+  var originalRenderFlatMetrics = window.renderFlatMetrics || renderFlatMetrics;
+  window.renderFlatMetrics = renderFlatMetrics = function(c, idx){
+    var html = originalRenderFlatMetrics(c, idx);
+    var p = (window.flatRates && flatRates[idx]) || {};
+    var block = calculatedDetailsBlock(p, idx);
+    return String(html).replace(
+  '<div class="flow-results"><h3>Output</h3>',
+  '<div class="flow-results"><h3>Output</h3><div style="margin:12px 0;padding:10px 12px;border:2px solid #F29200;border-radius:12px;background:#fff8e8;color:#1A497F;font-weight:900;">TEST: Calculated details should appear here</div>' + block
+);
+  };
 
   window.renderFlatPosition = renderFlatPosition = function(p, idx){
     var c = computePosition(p);
@@ -1168,7 +1174,7 @@ function buildContractHtml(p, idx){
     if (!!p._collapsed){
       return '<div class="position is-collapsed">' + renderPositionSummary(p, idx) + '</div>';
     }
-    return '<div class="position flat-workspace-position"><div class="top-actions flat-workspace-header"><div><h4>' + esc(displayTitle) + '</h4></div><div class="position-tools"><button class="small primary" onclick="saveFlat(' + idx + ')">' + (p._saved ? 'Save position' : 'Save changes') + '</button><button class="secondary small" onclick="event.stopPropagation(); removeFlat(' + idx + ')">Remove</button></div></div><div class="position-open-shell flat-workspace-shell"><aside class="flat-workspace-left" aria-label="Inputs"><div class="flat-workspace-panel-title">Inputs</div>' + renderPositionDetails(p, idx) + renderSmartComponentRows(p, c, idx) + '</aside><section class="flat-workspace-right" aria-label="Calculation output">' + renderFlatMetrics(c, idx) + '</section></div></div>';
+    return '<div class="position flat-workspace-position"><div class="top-actions flat-workspace-header"><div><h4>' + esc(displayTitle) + '</h4></div><div class="position-tools"><button class="small primary" onclick="saveFlat(' + idx + ')">' + (p._saved ? 'Save position' : 'Save changes') + '</button><button class="secondary small" onclick="event.stopPropagation(); removeFlat(' + idx + ')">Remove</button></div></div><div class="position-open-shell flat-workspace-shell"><aside class="flat-workspace-left" aria-label="Inputs and assumptions"><div class="flat-workspace-panel-title">Inputs &amp; assumptions</div>' + renderPositionDetails(p, idx) + renderSmartComponentRows(p, c, idx) + '</aside><section class="flat-workspace-right" aria-label="Calculation output">' + renderFlatMetrics(c, idx) + '</section></div></div>';
   };
 })();
 <\/script>
@@ -1180,7 +1186,7 @@ function buildContractHtml(p, idx){
 
 
 <style id="inputs-assumptions-plus-20-v5">
-/* User request: increase the Inputs panel by 20%. */
+/* User request: increase the Inputs & assumptions panel by 20%. */
 @media (min-width:1101px){
   .flat-workspace-shell{
     grid-template-columns:minmax(460px,548px) minmax(0,1fr)!important;
@@ -1193,7 +1199,7 @@ function buildContractHtml(p, idx){
 
 
 <style id="mi-half-screen-layout-v6">
-/* FINAL LAYOUT FIX: Inputs take the left half, Output takes the right half. */
+/* FINAL LAYOUT FIX: Inputs & assumptions take the left half, Output takes the right half. */
 @media (min-width:1101px){
   #stepContent .flat-workspace-shell{
     display:grid!important;
@@ -2423,13 +2429,13 @@ function renderSmartComponentRows(p, c, idx){
     return `
     <tr class="component-line"><td><div class="invoice-label"><div class="invoice-kicker">${row.kicker}</div><div class="invoice-name">${row.label}</div>
           ${row.note ? `<div class="invoice-note">${row.note}</div>` : ''}
-        </div></td><td><div class="component-editor"><div class="component-input-cell"><input type="text" inputmode="decimal" class="flat-input formatted-number-input" data-idx="${idx}" data-field="${row.qtyField}" value="${formatPlainNumber(p[row.qtyField])}" aria-label="Quantity for ${row.label}"></div><div class="component-input-cell"><input type="text" inputmode="decimal" class="flat-input formatted-number-input" data-idx="${idx}" data-field="${row.rateField}" value="${formatPlainNumber(p[row.rateField])}" aria-label="Rate for ${row.label}"></div><div class="component-total-wrap"><div class="component-total" id="component-total-${idx}-${row.key}">${money(row.total)}</div></div></div></td></tr>`;
+        </div></td><td><div class="component-editor"><div class="component-input-cell"><label class="component-mobile-label">Qty</label><input type="text" inputmode="decimal" class="flat-input formatted-number-input" data-idx="${idx}" data-field="${row.qtyField}" value="${formatPlainNumber(p[row.qtyField])}" placeholder="Qty" aria-label="Quantity for ${row.label}"></div><div class="component-input-cell"><label class="component-mobile-label">Rate</label><input type="text" inputmode="decimal" class="flat-input formatted-number-input" data-idx="${idx}" data-field="${row.rateField}" value="${formatPlainNumber(p[row.rateField])}" placeholder="Rate" aria-label="Rate for ${row.label}"></div><div class="component-total-wrap"><div class="component-total" id="component-total-${idx}-${row.key}">${money(row.total)}</div></div></div></td></tr>`;
   };
 
   return `<div class="flat-subsection-head"><h4 class="flat-subsection-title">Input</h4></div><div class="component-breakdown flat-input-breakdown">` + sections.map(section => {
     const body = section.rows.map(row => renderLine(row)).join("");
 
-    return `<div class="component-section"><div class="invoice-head"><div class="invoice-title">${section.title}</div>${section.subtitle ? `<div class="invoice-sub">${section.subtitle}</div>` : ``}</div><table class="component-table"><colgroup><col><col></colgroup><tbody><tr class="component-colhead"><td></td><td><div class="component-editor ${section.rows.some(r => r.special === "percent") ? "component-editor-margin" : ""}"><div class="component-hlabel">${section.rows.some(r => r.special === "percent") ? "" : "Quantity"}</div><div class="component-hlabel">${section.rows.some(r => r.special === "percent") ? "Rate" : "Rate"}</div><div class="component-total-spacer"></div></div></td></tr>
+    return `<div class="component-section"><div class="invoice-head"><div class="invoice-title">${section.title}</div>${section.subtitle ? `<div class="invoice-sub">${section.subtitle}</div>` : ``}</div><table class="component-table"><colgroup><col><col></colgroup><tbody><tr class="component-colhead"><td></td><td><div class="component-editor ${section.rows.some(r => r.special === "percent") ? "component-editor-margin" : ""}"><div class="component-hlabel">${section.rows.some(r => r.special === "percent") ? "" : "Qty"}</div><div class="component-hlabel">${section.rows.some(r => r.special === "percent") ? "Rate" : "Rate"}</div><div class="component-total-spacer"></div></div></td></tr>
           ${body}
           ${section.totalValue === null ? "" : `
           <tr class="component-line total"><td><div class="invoice-label"><div class="invoice-name">Section total</div></div></td><td><div class="component-editor"><div></div><div></div><div class="component-total-wrap"><div class="component-total">${money(section.totalValue)}</div></div></div></td></tr>`}
@@ -2452,9 +2458,6 @@ function renderFlatMetrics(c, idx){
   const vatRateApplied = (c.vatCollected || 0) > 0 ? `${formatPlainNumber(((c.vatCollected || 0) / Math.max(0.0001, vatBase)) * 100)}%` : "0%";
   const vatCostFlag = (c.vatCollected || 0) > 0 ? ((c.vatCost || 0) > 0 ? "non-recoverable" : "recoverable") : "not collected";
   const grossFormula = (position.inputMode === "Net") ? "Net input / (1 - WHT rate)" : "Fees + Per diem + Other";
-  const calculatedDetailsHtml = (typeof window !== "undefined" && typeof window.calculatedDetailsBlock === "function")
-    ? window.calculatedDetailsBlock(position, idx)
-    : "";
 
   const invoiceLine = (kicker, name, formula, id, value, note = '', extraClass = '') => {
     const tooltipText = `Calculation: ${formula}${note ? ` — ${note}` : ''}`;
@@ -2465,7 +2468,7 @@ function renderFlatMetrics(c, idx){
         </div></td><td class="invoice-amount-cell"><div class="invoice-amount calculation-tooltip" id="metric-${idx}-${id}" tabindex="0" title="${tooltip}" aria-label="${tooltip}" data-tooltip="${tooltip}">${value}</div></td></tr>`;
   };
 
-  return `<div class="flow-results"><h3>Output</h3>${calculatedDetailsHtml}<div class="invoice-breakdown"><div class="invoice-section"><div class="invoice-head"><div class="invoice-title">Provider remuneration</div><div class="invoice-sub">Gross-to-net story. Hover over an amount to see the calculation.</div></div><table class="invoice-table story-table"><colgroup><col class="concept-col"><col class="amount-col"></colgroup>
+  return `<div class="flow-results"><h3>Output</h3><div class="invoice-breakdown"><div class="invoice-section"><div class="invoice-head"><div class="invoice-title">Provider remuneration</div><div class="invoice-sub">Gross-to-net story. Hover over an amount to see the calculation.</div></div><table class="invoice-table story-table"><colgroup><col class="concept-col"><col class="amount-col"></colgroup>
           ${invoiceLine('Line 1', 'Contractual gross remuneration', grossFormula, 'Gj', money(c.remunerationTotal))}
           ${invoiceLine('Line 2', 'Taxable base', 'Gross remuneration - non-taxable allowances', 'Gjtax', money(c.taxableBase))}
           ${invoiceLine('Line 3', 'Gross-up effect', 'Gross remuneration - net input', 'GrossUp', money(c.grossUpAmount || 0))}
@@ -2575,7 +2578,7 @@ function renderFlatPosition(p, idx){
       ${renderPositionSummary(p, idx)}
     </div>`;
   }
-  return `<div class="position flat-workspace-position"><div class="top-actions flat-workspace-header"><div><h4>${esc(displayTitle)}</h4></div><div class="position-tools"><button class="small primary" onclick="saveFlat(${idx})">${p._saved ? "Save position" : "Save changes"}</button><button class="secondary small" onclick="event.stopPropagation(); removeFlat(${idx})">Remove</button></div></div><div class="position-open-shell flat-workspace-shell"><aside class="flat-workspace-left" aria-label="Inputs"><div class="flat-workspace-panel-title">Inputs</div>${renderPositionDetails(p, idx)}${renderSmartComponentRows(p, c, idx)}</aside><section class="flat-workspace-right" aria-label="Calculation output">${renderFlatMetrics(c, idx)}</section></div></div>`;
+  return `<div class="position flat-workspace-position"><div class="top-actions flat-workspace-header"><div><h4>${esc(displayTitle)}</h4></div><div class="position-tools"><button class="small primary" onclick="saveFlat(${idx})">${p._saved ? "Save position" : "Save changes"}</button><button class="secondary small" onclick="event.stopPropagation(); removeFlat(${idx})">Remove</button></div></div><div class="position-open-shell flat-workspace-shell"><aside class="flat-workspace-left" aria-label="Inputs and assumptions"><div class="flat-workspace-panel-title">Inputs &amp; assumptions</div>${renderPositionDetails(p, idx)}${renderSmartComponentRows(p, c, idx)}</aside><section class="flat-workspace-right" aria-label="Calculation output">${renderFlatMetrics(c, idx)}</section></div></div>`;
 }
 
 function renderExpenseList(kind, items, title){
@@ -7813,112 +7816,4 @@ document.addEventListener('click', function(event){
   else observe();
   setTimeout(centerMarginIqMenuButton, 50);
   setTimeout(centerMarginIqMenuButton, 300);
-})();
-
-
-/* ==========================================================================
-   Runtime layout patch v2 | no inner input scroll and single column labels
-   ========================================================================== */
-(function(){
-  try {
-    var existing = document.getElementById('marginiq-output-input-layout-runtime-fix-v2');
-    if (existing) existing.remove();
-    var css = `
-      #stepContent .flat-workspace-shell,
-      .flat-workspace-shell {
-        align-items: start !important;
-        overflow: visible !important;
-      }
-      #stepContent .flat-workspace-left,
-      .flat-workspace-left {
-        max-height: none !important;
-        height: auto !important;
-        overflow-y: visible !important;
-        overflow-x: visible !important;
-        overflow: visible !important;
-        position: static !important;
-      }
-      #stepContent .flat-workspace-right,
-      .flat-workspace-right {
-        overflow: visible !important;
-      }
-      .flat-workspace-left .component-mobile-label,
-      .flat-workspace-left .component-field-label {
-        display: none !important;
-      }
-      .flat-workspace-left .component-colhead .component-hlabel {
-        display: block !important;
-        text-align: center !important;
-        font-size: 12px !important;
-        font-weight: 900 !important;
-        color: #64748b !important;
-      }
-      .flat-workspace-right .flat-calculated-output-panel {
-        margin: 0 0 14px 0 !important;
-      }
-    `;
-    var style = document.createElement('style');
-    style.setAttribute('id', 'marginiq-output-input-layout-runtime-fix-v2');
-    style.appendChild(document.createTextNode(css));
-    document.head.appendChild(style);
-  } catch (_) {}
-})();
-
-
-/* ==========================================================================
-   Runtime layout patch v3 | force current asset + requested input/output layout
-   ========================================================================== */
-(function(){
-  try {
-    var existing = document.getElementById('marginiq-output-input-layout-runtime-fix-v3');
-    if (existing) existing.remove();
-    var css = `
-      #stepContent .flow-results > h3 + .flat-calculated-output-panel,
-      .flow-results > h3 + .flat-calculated-output-panel {
-        display: block !important;
-        order: -999 !important;
-        margin: 12px 0 16px 0 !important;
-      }
-      #stepContent .flat-workspace-shell,
-      .flat-workspace-shell {
-        align-items: start !important;
-        overflow: visible !important;
-      }
-      #stepContent .flat-workspace-left,
-      .flat-workspace-left {
-        max-height: none !important;
-        height: auto !important;
-        overflow-y: visible !important;
-        overflow-x: visible !important;
-        overflow: visible !important;
-        position: static !important;
-      }
-      #stepContent .flat-workspace-right,
-      .flat-workspace-right {
-        overflow: visible !important;
-      }
-      .flat-workspace-left .component-mobile-label,
-      .flat-workspace-left .component-field-label {
-        display: none !important;
-      }
-      .flat-workspace-left .component-colhead,
-      .flat-workspace-left .component-colhead td {
-        display: table-row !important;
-      }
-      .flat-workspace-left .component-colhead .component-hlabel {
-        display: block !important;
-        text-align: center !important;
-        font-size: 12px !important;
-        font-weight: 900 !important;
-        color: #64748b !important;
-      }
-      .flat-workspace-left .component-input-cell input::placeholder {
-        color: transparent !important;
-      }
-    `;
-    var style = document.createElement('style');
-    style.setAttribute('id', 'marginiq-output-input-layout-runtime-fix-v3');
-    style.appendChild(document.createTextNode(css));
-    document.head.appendChild(style);
-  } catch (_) {}
 })();
